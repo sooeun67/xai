@@ -60,7 +60,11 @@ Explainable Artificial Intelligence(XAI) algorithms / research papers
 
 ## Filter Visualization
 
-## LRP(Layer-wise Relevance Propagation)
+## [LRP](Layer-wise Relevance Propagation)
+- DNN 출력 값을 Decomposition하여 각각의 피처에 대한 타당성 점수(relevance score)를 계산
+- CNN에서는 타당성이 레이어 간에 전파되며, RNN은 타당성이 은닉상태와 메모리 셀에 전파
+- 모든 모델에 적용 가능
+- ![image](https://user-images.githubusercontent.com/12220234/142083511-32da108a-b6d5-4827-879a-00e89f55238a.png)
 
 
 
