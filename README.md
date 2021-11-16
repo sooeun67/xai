@@ -67,7 +67,7 @@ Explainable Artificial Intelligence(XAI) algorithms / research papers
 
 - 잘 훈련된 네트워크에 input(x):수탉 사진/ouput(f(x)):'수탉'이 경우, 이 '수탉'이라는 출력 f(x)를 얻기 위해 입력 샘플의 각 pixel들이 기여하는 바를 계산하는 방법
 - 아래의 그림1에서 보이는 것처럼 heatmap이라고 적힌 그림에 pixel들의 기여도(relevance score)가 색깔로 표시되며, 수탉의 부리나 머리 등을 보고 해당 입력의 클래스가 '수탉'임을 출력했다는 것을 알 수 있음
-- ![image](https://user-images.githubusercontent.com/12220234/142083511-32da108a-b6d5-4827-879a-00e89f55238a.png)
+- ![image](https://user-images.githubusercontent.com/12220234/142083511-32da108a-b6d5-4827-879a-00e89f55238a.png width="30%" height="30%")
 ![image](https://user-images.githubusercontent.com/12220234/142083977-8608943b-387f-4118-9ce2-de08ea9f9f75.png)
 
 ### 장점
