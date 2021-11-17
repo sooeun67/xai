@@ -86,9 +86,17 @@ Explainable Artificial Intelligence(XAI) algorithms / research papers
 - **즉, 학습된 CNN 필터들은 이런식으로 경계선을 찾거나 블러리한 면을 찾는 등 다양한 주파수 필터의 기능을 한다.**
 - **피처맵 시각화 방식으로, 모델이 입력 이미지에 어떻게 반응하는지 조사하는 방법**
 
-### Occlusion Experiment[Zeiler & Fergus 2013]
+### Occlusion Experiment(Zeiler & Fergus 2013)
 ![image](https://user-images.githubusercontent.com/12220234/142085160-81dd04e3-489a-4dc5-9aa0-af6f067cc23d.png)
-- 위 그림은 image의 어떤 부분이 이미지 분류에 큰 영향을 미치는지 알아본 결과이다. (a)와 같은 input image가 있을 때, 작은 회색 상자를 그린다. 그리고 모델에 통과시켜서 나온 결과를 기록한다. 이 회색상자를 조금씩 이동시키면서 위 과정을 반복한다. 그 결과를 heatmap으로 시각화한 것이 (d), (e)이다. (d)는 회색상자로 일부가 지워진 그림이 포메라니안일 확률이 높으면 빨간색이고, 낮으면 파란색이다. 즉, 파란색으로 부분이 지워지면 포메라니안으로 분류될 확률이 낮으므로 이 부분이 분류 결과를 결정하는 중요한 부분임을 암시한다. Input image에서 파란 부분은 강아지의 얼굴임을 알 수 있다. 즉, 본 실험은 CNN이 사람이 물체를 인식하는 과정과 유사하다는 것을 검증하였다.
+- 위 그림은 image의 *어떤 부분이 이미지 분류에 큰 영향*을 미치는지 알아본 결과
+- 방법: (a)와 같은 input image가 있을 때, 작은 회색 상자를 그리고,모델에 통과시켜서 나온 결과를 기록 -> 이 회색상자를 조금씩 이동시키면서 위 과정을 반복 
+- 결과: 결과를 heatmap으로 시각화한 것이 (d), (e)로, (d)는 회색상자로 일부가 지워진 그림이 포메라니안일 확률이 높으면 빨간색이고, 낮으면 파란색
+- 즉, 파란색으로 부분이 지워지면 포메라니안으로 분류될 확률이 낮으므로 이 부분이 분류 결과를 결정하는 중요한 부분임을 암시함. Input image에서 파란 부분은 강아지의 얼굴
+- 결론: 본 실험은 CNN이 사람이 물체를 인식하는 과정과 유사하다는 것을 검증
+
+### CAM visualization(2016)
+![2019 Seminar-18](https://user-images.githubusercontent.com/12220234/142095727-483622ea-9fcb-433e-af6e-436492593769.jpg)
+![image](https://user-images.githubusercontent.com/12220234/142095885-27a6a13b-9f76-43d1-a8b5-3eb83ec561b6.png)
 
 -------
 #### Reference (참고문헌)
@@ -99,3 +107,5 @@ Explainable Artificial Intelligence(XAI) algorithms / research papers
 - 
 - lrp paper: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0130140
 - https://angeloyeo.github.io/2019/08/17/Layerwise_Relevance_Propagation.html
+
+- CAM :https://tyami.github.io/deep%20learning/CNN-visualization-Grad-CAM/
