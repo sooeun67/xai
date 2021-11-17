@@ -109,6 +109,7 @@ Explainable Artificial Intelligence(XAI) algorithms / research papers
 - 학습한 네트워크가 이미지를 개라고 판별할 때와 고양이라고 판별할 때, 각각 이미지에서 중요하게 생각하는 영역은 다를 것입니다. 이를 시각화해주는 알고리즘이 바로 Class Activation Map (CAM) 관련 알고리즘들입니다. CNN 모델이 어느 곳을 보고 있는지를 알려주는 weak supervised learning 알고리즘 (CAM, Grad-CAM)
 
 ![2019 Seminar-18](https://user-images.githubusercontent.com/12220234/142095727-483622ea-9fcb-433e-af6e-436492593769.jpg)
+![image](https://user-images.githubusercontent.com/12220234/142136156-e76a3058-d2fe-426e-818c-4ca611632cbc.png)
 
 ### 장점
 - (추후 추가 예정)
