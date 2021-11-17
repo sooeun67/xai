@@ -48,13 +48,23 @@ Explainable Artificial Intelligence(XAI) algorithms / research papers
 ## [SHAP](https://github.com/slundberg/shap)
 - Shapely Value: 전체 성과를 창출하는 데 각 참여자가 얼마나 공헌했는지를 수치로 표현. 각 사람의 기여도는 그 사람의 기여도를 제외했을 때의 전체 성과 변화 정도로 나타낼 수 있다
 - 원리: 모델이 표현할 수 있는 모든 조합과 feature 
+- 
+![shap](https://github.com/sooeun67/xai/blob/main/images/shap.png)
+- 예시) 집값을 결정짓는 요인으로 [숲세권, 면적/층, 고양이 양육가능여부] Feature 존재
+-- '고양이 양육가능여부' 의 집값에 대한 기여도를 평가해보자
+-- 나머지 feature 들이 동일하다는 전제 하에, 310,000 (`cat-banned`) - 320,000 (`cat-allowed`) = -10,000
+-- 다시 말해, `cat-banned` 의 기여도는 -10,000 유로
+-- 이 계산 과정을 모든 가능한 combination 에 대해 반복 
 
-
-
-
-#### Limitations & 차이점
-- Local Explanation 을 기반으로 하여, 데이터의 **전체적인 영역에 대한 해석(Global Surrogate)** 이 가능하다는 게 LIME과의 차이
+### 장점
+- model-agnostic: 다양한 모델에 적용 가능
+- consistent: 계산할 때마다 같은 결과 출력
 - negative(-) 기여도 계산 가능 
+- Local Explanation 을 기반으로 하여, 데이터의 **전체적인 영역에 대한 해석(Global Surrogate)** 이 가능하다는 게 LIME과의 차이
+
+### 단점 및 고려사항
+- 계산 시간: 모든 조합에 대해 연산하고 missing feature 시뮬레이션 하기 때문에
+
 
 ## [LRP](Layer-wise Relevance Propagation)
 - **결과를 역추적해서 입력 이미지에 히트맵을 출력**
@@ -118,3 +128,5 @@ Explainable Artificial Intelligence(XAI) algorithms / research papers
 - https://angeloyeo.github.io/2019/08/17/Layerwise_Relevance_Propagation.html
 
 - CAM :https://tyami.github.io/deep%20learning/CNN-visualization-Grad-CAM/
+- https://velog.io/@tobigs_xai/2%EC%A3%BC%EC%B0%A8-SHAP-SHapley-Additive-exPlanation
+
