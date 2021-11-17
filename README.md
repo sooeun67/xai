@@ -56,24 +56,10 @@ Explainable Artificial Intelligence(XAI) algorithms / research papers
 - Local Explanation 을 기반으로 하여, 데이터의 **전체적인 영역에 대한 해석(Global Surrogate)** 이 가능하다는 게 LIME과의 차이
 - negative(-) 기여도 계산 가능 
 
-
-
-## [FV] (Filter Visualization)
-
-필터(filter or kenrel)은 원본 데이터를 해석하기 위해 사용하는 일정한 행렬 값이다. 필터는 원본 이미지에서 특정 요소를 추출하기 위해 사용한다. 즉, 주파수 필터의 역할을 하는 것이다. 다섯번 째 그림은 저주파만 통과하기 때문에 블러리한 이미지를 결과로 얻으며, 세번째 그림인 Laplace Filter는 Edge를 찾는 역할을 한다. 네번째 그림인 high-pass filter는 이미지가 선명해지는 결과를 얻을 수 있다.
-즉, 학습된 CNN 필터들은 이런식으로 경계선을 찾거나 블러리한 면을 찾는 등 다양한 주파수 필터의 기능을 한다.
-
-
-### Occlusion Experiment[Zeiler & Fergus 2013]
-![image](https://user-images.githubusercontent.com/12220234/142085302-8be71257-5409-4546-8493-d7240e393bf6.png)
-위 그림은 image의 어떤 부분이 이미지 분류에 큰 영향을 미치는지 알아본 결과이다. (a)와 같은 input image가 있을 때, 작은 회색 상자를 그린다. 그리고 모델에 통과시켜서 나온 결과를 기록한다. 이 회색상자를 조금씩 이동시키면서 위 과정을 반복한다. 그 결과를 heatmap으로 시각화한 것이 (d), (e)이다. (d)는 회색상자로 일부가 지워진 그림이 포메라니안일 확률이 높으면 빨간색이고, 낮으면 파란색이다. 즉, 파란색으로 부분이 지워지면 포메라니안으로 분류될 확률이 낮으므로 이 부분이 분류 결과를 결정하는 중요한 부분임을 암시한다. Input image에서 파란 부분은 강아지의 얼굴임을 알 수 있다. 즉, 본 실험은 CNN이 사람이 물체를 인식하는 과정과 유사하다는 것을 검증하였다.
-
-![image](https://user-images.githubusercontent.com/12220234/142085160-81dd04e3-489a-4dc5-9aa0-af6f067cc23d.png)
-
-
 ## [LRP](Layer-wise Relevance Propagation)
+- **결과를 역추적해서 입력 이미지에 히트맵을 출력**
 - DNN 출력 값을 Decomposition하여 각각의 피처에 대한 기여도(relevance score)를 계산
-- CNN에서는 타당성이 레이어 간에 전파되며, RNN은 타당성이 은닉상태와 메모리 셀에 전파
+-  Relevance score를 Output layer에서 Input layer 방향으로 계산해나가며 그 비중을 재분배하는 방법
 - 모든 모델에 적용 가능
 
 - 잘 훈련된 네트워크에 input(x):수탉 사진/ouput(f(x)):'수탉'이 경우, 이 '수탉'이라는 출력 f(x)를 얻기 위해 입력 샘플의 각 pixel들이 기여하는 바를 계산하는 방법
@@ -91,7 +77,18 @@ Explainable Artificial Intelligence(XAI) algorithms / research papers
 ### sample
 - https://lrpserver.hhi.fraunhofer.de/handwriting-classification
 
+## [FV] (Filter Visualization)
 
+### Filter
+![image](https://user-images.githubusercontent.com/12220234/142094772-7d22112a-fe88-4fa3-ae42-bf14a74e7d75.png)
+- 필터는 원본 이미지에서 특정 요소를 추출하기 위해 사용하는 것으로, 주파수 필터을 함.
+- 다섯번 째 그림은 저주파만 통과하기 때문에 블러리한 이미지를 결과로 얻으며, 세번째 그림인 Laplace Filter는 Edge를 찾는 역할. 네번째 그림인 high-pass filter는 이미지가 선명해지는 결과를 얻음.
+- **즉, 학습된 CNN 필터들은 이런식으로 경계선을 찾거나 블러리한 면을 찾는 등 다양한 주파수 필터의 기능을 한다.**
+- **피처맵 시각화 방식으로, 모델이 입력 이미지에 어떻게 반응하는지 조사하는 방법**
+
+### Occlusion Experiment[Zeiler & Fergus 2013]
+![image](https://user-images.githubusercontent.com/12220234/142085160-81dd04e3-489a-4dc5-9aa0-af6f067cc23d.png)
+- 위 그림은 image의 어떤 부분이 이미지 분류에 큰 영향을 미치는지 알아본 결과이다. (a)와 같은 input image가 있을 때, 작은 회색 상자를 그린다. 그리고 모델에 통과시켜서 나온 결과를 기록한다. 이 회색상자를 조금씩 이동시키면서 위 과정을 반복한다. 그 결과를 heatmap으로 시각화한 것이 (d), (e)이다. (d)는 회색상자로 일부가 지워진 그림이 포메라니안일 확률이 높으면 빨간색이고, 낮으면 파란색이다. 즉, 파란색으로 부분이 지워지면 포메라니안으로 분류될 확률이 낮으므로 이 부분이 분류 결과를 결정하는 중요한 부분임을 암시한다. Input image에서 파란 부분은 강아지의 얼굴임을 알 수 있다. 즉, 본 실험은 CNN이 사람이 물체를 인식하는 과정과 유사하다는 것을 검증하였다.
 
 -------
 #### Reference (참고문헌)
