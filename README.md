@@ -64,7 +64,7 @@ Explainable Artificial Intelligence(XAI) algorithms / research papers
 
 - 잘 훈련된 네트워크에 input(x):수탉 사진/ouput(f(x)):'수탉'이 경우, 이 '수탉'이라는 출력 f(x)를 얻기 위해 입력 샘플의 각 pixel들이 기여하는 바를 계산하는 방법
 - 아래의 그림1에서 보이는 것처럼 heatmap이라고 적힌 그림에 pixel들의 기여도(relevance score)가 색깔로 표시되며, 수탉의 부리나 머리 등을 보고 해당 입력의 클래스가 '수탉'임을 출력했다는 것을 알 수 있음
-- ![lrp_example](https://user-images.githubusercontent.com/12220234/142083511-32da108a-b6d5-4827-879a-00e89f55238a.png)
+![lrp_example](https://user-images.githubusercontent.com/12220234/142083511-32da108a-b6d5-4827-879a-00e89f55238a.png)
 
 ### 장점
 - 비교적 직관적
@@ -98,7 +98,14 @@ Explainable Artificial Intelligence(XAI) algorithms / research papers
 - 학습한 네트워크가 이미지를 개라고 판별할 때와 고양이라고 판별할 때, 각각 이미지에서 중요하게 생각하는 영역은 다를 것입니다. 이를 시각화해주는 알고리즘이 바로 Class Activation Map (CAM) 관련 알고리즘들입니다. CNN 모델이 어느 곳을 보고 있는지를 알려주는 weak supervised learning 알고리즘 (CAM, Grad-CAM)
 
 ![2019 Seminar-18](https://user-images.githubusercontent.com/12220234/142095727-483622ea-9fcb-433e-af6e-436492593769.jpg)
-![image](https://user-images.githubusercontent.com/12220234/142095885-27a6a13b-9f76-43d1-a8b5-3eb83ec561b6.png)
+
+### 장점
+- (추후 추가 예정)
+
+### 단점
+- 깊은 은닉 계층일수록 해석력이 떨어짐
+- 해석자마다 해석 방법이 다를 수 있음
+
 
 -------
 #### Reference (참고문헌)
