@@ -23,7 +23,8 @@ Explainable Artificial Intelligence(XAI) algorithms / research papers
 - 40명의 얼굴을 학습한 후, 어떤 인풋 이미지가 들어왔을 때 40명 중 한 명을 구분하는 모델이 있다고 가정하자. 이때 어떤 이미지 x 가 모델 입력값으로 들어온다면 LIME은 입력 이미지에 대해 아래와 같이 해석 가능하도록 인식 단위를 쪼개고 이미지를 해석한다
 ![lime_1](https://github.com/sooeun67/xai/blob/main/images/lime_1.png)
 
-그리고 이렇게 나뉜 영역을 조합해서 원본 모델이 대상을 가장 잘 분류할 수 있는 대표 이미지를 구성
+이렇게 나뉜 영역(슈퍼픽셀)을 조합해서 원본 블랙박스 모델 f의 예측 결과와 가장 유사한 대표 이미지를 구성
+![lime_4](https://github.com/sooeun67/xai/blob/main/images/lime_4.png)
 
 어떤 이미지가 입력 값으로 주어졌을 때, 이미지 내 특정 관심 영역을 x라 하고, 초점 주변으로 관심 영역을 키워갈 때 기준 x 로부터 동일한 정보를 가지고 있다고 간주할 수 있을 때, 이 영역을 πx​이라 하고 이를 슈퍼 픽셀(super pixel)이라 한다
 
