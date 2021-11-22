@@ -6,7 +6,7 @@
 ### 개요
 - Shapley Value를 기반으로 하는 XAI
 	- Lundberg와 Lee가 제안한 SHAP (SHapley Additive exPlanations)은 각 예측치를 설명할 수 있는 방법이다. SHAP은 게임 이론을 따르는 최적의 Shapley Value를 기반으로한다.
-	- Shapley Value : 하나의 특성 대한 중요도를 알기위해 여러 특성들의 조합을 구성하고 해당 특성의 유무에 따른 평균적인 변화를 통해 얻어낸 값
+	- Shapley Value : 하나의 특성에 대한 중요도를 알기위해 여러 특성들의 조합을 구성하고 해당 특성의 유무에 따른 평균적인 변화를 통해 얻어낸 값
 
 ### 정의
 - SHAP의 목적은 예측에 대한 각 특성의 기여도를 계산하여 관측치 x의 예측값을 설명하는 것이다. SHAP 설명 방법은 연합 게임 이론(coalitional game theory)을 사용하여 Shaply value를 계산하고 관측치(data instance)의 특성값은 연합에서 플레이어로서 역할을 한다. Shaply Value는 특성들 사이에 “지불(payout) (=예측(prediction))”을 공정하게 분배하는 방법을 알려준다. 예를 들어 tabular data에서 플레이어는 각각의 특성값이 될 수 있으며 특성값의 그룹이 될 수도 있다. 예를 들어 이미지를 설명하기 위해 픽셀을 수퍼 픽셀(픽셀들의 그룹)로 그룹화하고 수퍼 픽셀 간의 예측값의 분포를 확인할 수 있다. 
@@ -17,56 +17,40 @@
 - negative(-) 기여도 계산 가능
 
 ### 종류
-SHAP는 Shapley value (데이터 한 개에 대한 설명, Local)을 기반으로, 데이터 셋의 ‘전체적인 영역’에 대한 해석이 가능하다(Global)
-모델의 특징에 따라, 계산법을 달리하여 빠르게 처리한다.
-- Kernel SHAP : Linear LIME + Shapley Value
-- Tree SHAP : Tree Based Model
-- Deep SHAP : Deeplearning based model
+- SHAP는 Shapley value (데이터 한 개에 대한 설명, Local)을 기반으로, 데이터 셋의 ‘전체적인 영역’에 대한 해석이 가능하다(Global)
+- 모델의 특징에 따라, 계산법을 달리하여 빠르게 처리한다.
+	- Kernel SHAP : Linear LIME + Shapley Value
+	- Tree SHAP : Tree Based Model
+	- Deep SHAP : Deeplearning based model
+
+### 시각화
+
+![SHAP 시각화1](https://christophm.github.io/interpretable-ml-book/images/shap-importance.png) 
+- SHAP Feature Importance: 피쳐 중요도는 평균 절대 샤플리 값으로 측정된다. 위 결과에 따르면 호르몬 피임약을 사용한 연수가 가장 중요한 특징으로, 예측된 암 발생 확률을 평균 2.4%포인트 변경했다.(x축 : 0.024)
+
+![SHAP 시각화2](https://christophm.github.io/interpretable-ml-book/images/shap-importance-extended.png) 
+- SHAP Summary Plot: 호르몬 피임약을 복용하는 기간이 적을수록 암의 위험이 감소하고, 많은 해가 되면 그 위험이 증가한다. 단, 위 결과는 모델의 결과를 보여주며 현실 세계에서 반드시 인과관계가 있는 것은 아니다.
+
+![SHAP 시각화3](https://christophm.github.io/interpretable-ml-book/images/shap-dependence.png) 
+- SHAP Dependence Plot: 호르몬 피임약들에 대한 SHAP 의존도. 0년에 비해 몇 년은 예측 확률을 낮추고 높은 햇수는 예측된 암 확률을 높인다.
+
+![SHAP 시각화4](https://christophm.github.io/interpretable-ml-book/images/shap-dependence-interaction.png) 
+- SHAP Interaction Values: SHAP 피쳐 의존도와 상호작용 시각화. 호르몬 피임약의 해는 성병과 상호작용을 한다. 0년에 가까운 경우, 성병의 발생은 예측된 암 위험을 증가시킨다. 피임약에서 더 많은 해 동안, 성병의 발생은 예측된 위험을 감소시킨다. 다시 말하지만, 이것은 인과 모델이 아니다. 효과는 교란 요인에 기인할 수 있다(예: 성병과 낮은 암 위험은 더 많은 의사 방문과 상관관계가 있을 수 있다).
+
+![SHAP 시각화5](https://christophm.github.io/interpretable-ml-book/images/shap-clustering.png)
+- Clustering SHAP values : 설명 유사성으로 클러스터링된 스택형 SHAP. x축의 각 위치는 데이터의 인스턴스(instance)이다. 빨간색 SHAP 값은 예측을 증가시키고, 파란색 값은 예측을 감소시킨다. 오른쪽에는 암 발병 리스크가 높게 예측되는 그룹이 있다.
 
 
 Ref.
 
 https://velog.io/@sjinu/개념정리SHAPShapley-Additive-exPlanations
+
 https://datanetworkanalysis.github.io/2019/12/23/shap1
+
 https://datanetworkanalysis.github.io/2019/12/24/shap2
+
 https://moondol-ai.tistory.com/378?category=947304
-https://tootouch.github.io/IML/start/
 
+https://tootouch.github.io/IML/shap/
 
-
-
-## [SHAP](https://github.com/slundberg/shap)
-- Shapely Value: 전체 성과를 창출하는 데 각 참여자가 얼마나 공헌했는지를 수치로 표현. 각 사람의 기여도는 그 사람의 기여도를 제외했을 때의 전체 성과 변화 정도로 나타낼 수 있다
-- 원리: 모델이 표현할 수 있는 모든 조합과 feature 
-- 
-![shap](https://github.com/sooeun67/xai/blob/main/images/shap.png)
-- 예시) 집값을 결정짓는 요인으로 [숲세권, 면적/층, 고양이 양육가능여부] Feature 존재
--- '고양이 양육가능여부' 의 집값에 대한 기여도를 평가해보자
--- 나머지 feature 들이 동일하다는 전제 하에, 310,000 (`cat-banned`) - 320,000 (`cat-allowed`) = -10,000
--- 다시 말해, `cat-banned` 의 기여도는 -10,000 유로
--- 이 계산 과정을 모든 가능한 combination 에 대해 반복 
-
-### 장점
-- model-agnostic: 다양한 모델에 적용 가능
-- consistent: 계산할 때마다 같은 결과 출력
-- negative(-) 기여도 계산 가능 
-- Local Explanation 을 기반으로 하여, 데이터의 **전체적인 영역에 대한 해석(Global Surrogate)** 이 가능하다는 게 LIME과의 차이
-
-
-
-# XAI
-Explainable Artificial Intelligence(XAI) algorithms / research papers
-
-## 대리분석 (Surrogate Analysis)
-본래 기능을 흉내내는 간단한 대체재를 만들어 prototype이 동작하는지 판단하는 분석기법
-![모델 f를 흉내내는 g1과 g2](https://github.com/sooeun67/xai/blob/main/images/surrogate_analysis.png)
-
-다시 말해, 블랙 박스 모델 f 가 존재하고, f를 흉내 내는 해석 가능한 ML 모델 g 를 만드는 것이 대리 분석의 목표. 모델 f 가 SVM을 사용해 학습한 모델이라면 모델 g 는 트리나 linear regression 일 수도 있다. 모델 g의 결정 조건은 (1) f 보다 학습하기 쉽고 (2) 설명 가능하며 (3) 모델 f 를 유사하게 흉내낼 수 있으면 된다
-
-- **장점**:
-	- model-agnostic: 모델에 대한 지식 없이 학습 가능
-	- 적은 학습 데이터로도 ok! (학습 데이터, 예측 모델만 있으면 됨)
-	- 모델이 바뀌더라도 feature 만 같다면 대리 분석 수행 가능
-
-### 로컬 대리분석 (Local Surrogate)
-데이터 하나에 대해 원래 모델인 블랙박스 모델이 분류한 결과를 해부하고 해석하는 과정을 분석하는 기법으로 대표적으로 **LIME** 과 **SHAP** 이 있다
+https://christophm.github.io/interpretable-ml-book/shap.html
