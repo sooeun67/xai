@@ -1,8 +1,8 @@
 ## [SHAP] SHAP (SHapley Additive exPlanations)
-- 개요
--- Lundberg와 Lee가 제안한 SHAP (SHapley Additive exPlanations)은 각 예측치를 설명할 수 있는 방법이다. SHAP은 게임 이론을 따르는 최적의 Shapley Value를 기반으로한다.
-- 정의
--- SHAP의 목적은 예측에 대한 각 특성의 기여도를 계산하여 관측치 x의 예측값을 설명하는 것이다. SHAP 설명 방법은 연합 게임 이론(coalitional game theory)을 사용하여 Shaply value를 계산하고 관측치(data instance)의 특성값은 연합에서 플레이어로서 역할을 한다. Shaply Value는 특성들 사이에 “지불(payout) (=예측(prediction))”을 공정하게 분배하는 방법을 알려준다. 예를 들어 tabular data에서 플레이어는 각각의 특성값이 될 수 있으며 특성값의 그룹이 될 수도 있다. 예를 들어 이미지를 설명하기 위해 픽셀을 수퍼 픽셀(픽셀들의 그룹)로 그룹화하고 수퍼 픽셀 간의 예측값의 분포를 확인할 수 있다. SHAP가 가져온 혁신 중 하나는 Shapley Values 설명이 additive feature method인 선형모델로 표현할 수 있다는 것이다.
+### 개요
+- Lundberg와 Lee가 제안한 SHAP (SHapley Additive exPlanations)은 각 예측치를 설명할 수 있는 방법이다. SHAP은 게임 이론을 따르는 최적의 Shapley Value를 기반으로한다.
+### 정의
+- SHAP의 목적은 예측에 대한 각 특성의 기여도를 계산하여 관측치 x의 예측값을 설명하는 것이다. SHAP 설명 방법은 연합 게임 이론(coalitional game theory)을 사용하여 Shaply value를 계산하고 관측치(data instance)의 특성값은 연합에서 플레이어로서 역할을 한다. Shaply Value는 특성들 사이에 “지불(payout) (=예측(prediction))”을 공정하게 분배하는 방법을 알려준다. 예를 들어 tabular data에서 플레이어는 각각의 특성값이 될 수 있으며 특성값의 그룹이 될 수도 있다. 예를 들어 이미지를 설명하기 위해 픽셀을 수퍼 픽셀(픽셀들의 그룹)로 그룹화하고 수퍼 픽셀 간의 예측값의 분포를 확인할 수 있다. SHAP가 가져온 혁신 중 하나는 Shapley Values 설명이 additive feature method인 선형모델로 표현할 수 있다는 것이다.
 
 
 
