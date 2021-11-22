@@ -47,7 +47,6 @@ Explainable Artificial Intelligence(XAI) algorithms / research papers
 ![lime_result](https://github.com/sooeun67/xai/blob/main/images/lime_result.png)
 
 
-## [SHAP] 추가 작업 예정 (Test)
 ## [SHAP](https://github.com/slundberg/shap)
 - Shapely Value: 전체 성과를 창출하는 데 각 참여자가 얼마나 공헌했는지를 수치로 표현. 각 사람의 기여도는 그 사람의 기여도를 제외했을 때의 전체 성과 변화 정도로 나타낼 수 있다
 - 원리: 모델이 표현할 수 있는 모든 조합과 feature 
