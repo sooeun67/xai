@@ -18,3 +18,17 @@
 
 ### sample
 - https://lrpserver.hhi.fraunhofer.de/handwriting-classification
+
+
+## 추가본
+
+
+L
+layer-wise (레이어 단위)로
+R
+Relevance 결과에 영향을 주는 (관련성)을 구하는
+P
+Propagation 역(전파) 기술
+
+- 입력 데이터 관점에서 **분류 결과** 뿐만 아니라 **결정에 영향**을 미치는 구조를 설명
+
