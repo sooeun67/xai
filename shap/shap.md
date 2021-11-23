@@ -68,3 +68,5 @@ https://moondol-ai.tistory.com/378?category=947304
 https://tootouch.github.io/IML/shap/
 
 https://christophm.github.io/interpretable-ml-book/shap.html
+
+https://www.youtube.com/watch?v=BQSkV95Dy4s
