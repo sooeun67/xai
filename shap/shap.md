@@ -5,7 +5,7 @@
 
 ### 개요
 - Shapley Value를 기반으로 하는 XAI
-	- Lundberg와 Lee가 제안한 SHAP (SHapley Additive exPlanations)은 Shapley Vlues를 기반으로 예측 값에 대한 각 feature의 기여도를 계산하여 Black box 모델 해석 제공 [(논문링크)](https://arxiv.org/pdf/1705.07874.pdf)
+	- Lundberg와 Lee가 제안한 SHAP (SHapley Additive exPlanations)은 Shapley Vlues를 기반으로 예측 값에 대한 각 feature의 기여도를 계산하여 Black box 모델 해석 제공 [(논문링크1)](https://arxiv.org/pdf/1705.07874.pdf) [(논문링크2)](https://arxiv.org/pdf/1802.03888.pdf)
 	- Shapley Value : 하나의 특성에 대한 중요도를 알기위해 특성들의 모드 조합을 구성하고 해당 특성의 유무에 따른 평균적인 변화를 통해 얻어낸 값
 
 ### 설명
