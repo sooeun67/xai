@@ -3,15 +3,15 @@
 > - 1975년, '설명 가능한 의사 결정 체계'의 용어 등장, Shortliffe. Edward H., and Bruce G. Buchanan . "A model of inexact reasoning in medicine." Mathematical biosciences 23.3-4(1975)
 > - 2004년, "XA"I 용어 등장, Michel van Lent, Willian Fisher and Michael Mancuso. "An explainable artificial intelligence system for small-unit tactical behavior.", Proceedings of the National Conference on Artificial Intelligence. Menlo Park, 2004 
 > - 2016년, DARPA (Depense Advanced Research Projects Agency), Project BAA-16-53, Explainable Artificial Intelligence, XAI. (~Y21) : 참조 https://ojs.aaai.org/index.php/aimagazine/article/view/2850
-> <img src="../master/images/darpa_intro2.png" alt="drawing" style="width:600px;"/>
+> <img src="https://github.com/sooeun67/xai/blob/main/xai_intro/images/darpa_intro2.png" alt="drawing" style="width:600px;"/>
 
 Accuracy 와 Explainability 의 Trade-Off 관계에 따라 실제 프로젝트에서 분석가들이 적용하는 알고리즘에 대한 고민이 깊어짐
 DL 전용방법론, 어떠한 모델이든 훈련된 모델 자체를 해석하는 기법 그리고 어떠한 모델이든 훈련된 모델의 대안모델을 통해 해석하는 기법 중심으로 발전하고 있음.
-> <img src="../master/xai_intro/images/darpa_intro.png" alt="drawing" style="width:600px;"/>
+> <img src="xai_intro/images/darpa_intro.png" alt="drawing" style="width:600px;"/>
 
 현재 State of The Art (SOTA)로 평가되는 것은 SHAP로 보이며 각종 platform에 이 기법이 장착되고 있는 추세.
 아래는 MS-AZURE 경우이며 이 외 Python-Orange3 의 plug-in 으로 SHAP, Explain 이 이미 제작되어 있음.
-> <img src="../master/xai_intro/images/Azure_shap.png" alt="drawing" style="width:600px;"/>
+> <img src="xai_intro/images/Azure_shap.png" alt="drawing" style="width:600px;"/>
 
 ## Interpretability/explainability
 - Explainability: possibility to explain from a technical point of view the prediction of an algorithm.
@@ -39,7 +39,7 @@ Trade-Off : To maximize performance, we use high-capability model. But it is har
 - 설명을 위해 Capacity가 낮은 모델을 사용하는 경우 복잡한 데이터에 대한 성능이 저하되어 실적용히 힘듦어짐.
 - Linear/Logistic Regression, Decision Tree, kNN 등이 대표적인 설명이 상대적으로 용이하나 복잡한 데이터에 대해 성능이 떨어지는 Model Specific Interpretation 영역에 속함
 
-> <img src="../master/xai_intro/images/interpretability_Acc.png" alt="drawing" style="width:600px;"/>
+> <img src="xai_intro/images/interpretability_Acc.png" alt="drawing" style="width:600px;"/>
 
 
 ---
@@ -77,7 +77,7 @@ Trade-Off : To maximize performance, we use high-capability model. But it is har
 - 원래 모델을 Black-box 모델로 본다
   - White-box 모델에서 행하던 방식처럼 모델 내부 변수 및 계수에 접근하지 않음. (Model Specific - Linear 모델의 Beta 계수 및 상관관계 해석하지 않음)
   - 모델의 input을 조절하며 output을 고찰, output 이나 원래값과의 차이 변동에 대해서 해석
-> <img src="../master/xai_intro/images/model_agnostic.png" alt="drawing" style="width:600px;"/>
+> <img src="xai_intro/images/model_agnostic.png" alt="drawing" style="width:600px;"/>
 
 
 #### Deep Neural Network (기존의 방법으로 해석 불가능)
@@ -92,9 +92,9 @@ Trade-Off : To maximize performance, we use high-capability model. But it is har
 ---
 
 ## Model-Agnostic Methods
-- Permutation Feature Importance (PFI) -- ../pfi/01.Permutation_FI.md
-- Partial Dependence Plot (PDP) -- ../pdp/02.PDP_ICE.md
-- Individual Conditional Expectation (ICE) -- ../pdp/02.PDP_ICE.md
+- [Permutation Feature Importance (PFI)](pfi/01.Permutation_FI.md)
+- [Partial Dependence Plot (PDP)](pdp/02.PDP_ICE.md)
+- [Individual Conditional Expectation (ICE)](pdp/02.PDP_ICE.md)
 - Local Interpretable Model-agnostic Explanations (LIME) -- 
 - SHAP (Shapley Additive explanations) -- 
 - FV and LRP (Filter Visualization and Layer Relevance Propagation) -- 
