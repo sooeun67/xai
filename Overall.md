@@ -3,7 +3,7 @@
 > - 1975년, '설명 가능한 의사 결정 체계'의 용어 등장, Shortliffe. Edward H., and Bruce G. Buchanan . "A model of inexact reasoning in medicine." Mathematical biosciences 23.3-4(1975)
 > - 2004년, "XA"I 용어 등장, Michel van Lent, Willian Fisher and Michael Mancuso. "An explainable artificial intelligence system for small-unit tactical behavior.", Proceedings of the National Conference on Artificial Intelligence. Menlo Park, 2004 
 > - 2016년, DARPA (Depense Advanced Research Projects Agency), Project BAA-16-53, Explainable Artificial Intelligence, XAI. (~Y21) : 참조 https://ojs.aaai.org/index.php/aimagazine/article/view/2850
-> <img src="https://github.com/sooeun67/xai/blob/main/xai_intro/images/darpa_intro2.png" alt="drawing" style="width:600px;"/>
+> <img src="xai_intro/images/darpa_intro2.png" alt="drawing" style="width:600px;"/>
 
 Accuracy 와 Explainability 의 Trade-Off 관계에 따라 실제 프로젝트에서 분석가들이 적용하는 알고리즘에 대한 고민이 깊어짐
 DL 전용방법론, 어떠한 모델이든 훈련된 모델 자체를 해석하는 기법 그리고 어떠한 모델이든 훈련된 모델의 대안모델을 통해 해석하는 기법 중심으로 발전하고 있음.
@@ -45,7 +45,7 @@ Trade-Off : To maximize performance, we use high-capability model. But it is har
 ---
 
 ### Model Specific Interpretation
-> <img src="../master/xai_intro/images/model_specific.png" alt="drawing" style="width:600px;"/>
+> <img src="xai_intro/images/model_specific.png" alt="drawing" style="width:600px;"/>
 
 #### Linear Regression (이론적으로 해석이 가능)
 - 상관계수(𝛽)를 ‘해석력’지표로서 간단히 참고가능
