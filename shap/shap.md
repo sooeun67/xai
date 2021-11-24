@@ -1,7 +1,7 @@
 ## [SHAP] SHAP (SHapley Additive exPlanations)
 
 ### Keyword
- - "변수 X1이 이 모델로부터 제거될 때 예측 P에 얼마나 변화를 줄까?"
+ - "변수 X1이 모델의 결과값(예측) P에 얼마나 기여를 할까?"
 
 ### 개요
 - Shapley Value를 기반으로 하는 XAI
