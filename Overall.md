@@ -107,15 +107,15 @@ Trade-Off : To maximize performance, we use high-capability model. But it is har
 ```
 | Tech.Name | Model Dependency | Global/Local | NoteBook Example |
 | :---         |     :---:      |          :---: |     :---:      |
-| Feature Importance (FI)   | Specific     | Global    | [Example](notebook_Exam/01_titanic/XAI_Example.html) |
-| [Permutation FI (PFI)](pfi/01.Permutation_FI.md)  | Agnostic     | Global    | [Example](notebook_Exam/01_titanic/XAI_Example.html) |
-| [Partial Dependent Plot (PDP)](pdp/02.PDP_ICE.md)   | Agnostic     | Global    | [Example](notebook_Exam/01_titanic/XAI_Example.html) |
-| [Individual Conditional Expectation (ICE)](pdp/02.PDP_ICE.md)      | Agnostic       | Local     |  [Example](notebook_Exam/01_titanic/XAI_Example.html) |
-| SHapley Additive exPlanations (SHAP)     | Agnostic       | Local/Global      | [Example](notebook_Exam/01_titanic/XAI_Example.html) |
+| Feature Importance (FI)   | Specific     | Global    | [Example](pdp/notebook_exam/01_titanic/XAI_Example.html) |
+| [Permutation FI (PFI)](pfi/01.Permutation_FI.md)  | Agnostic     | Global    | [Example](pdp/notebook_exam/01_titanic/XAI_Example.html) |
+| [Partial Dependent Plot (PDP)](pdp/02.PDP_ICE.md)   | Agnostic     | Global    | [Example](pdp/notebook_exam/01_titanic/XAI_Example.html) |
+| [Individual Conditional Expectation (ICE)](pdp/02.PDP_ICE.md)      | Agnostic       | Local     |  [Example](pdp/notebook_exam/01_titanic/XAI_Example.html) |
+| SHapley Additive exPlanations (SHAP)     | Agnostic       | Local/Global      | [Example](pdp/notebook_exam/01_titanic/XAI_Example.html) |
 | Local Interpretable Model Explanations (LIME)     | Agnostic-Surrogate       | Local      |
 | Layer-wise Relevance Propagation (LRP)     | DL Agnostic     | Local      |
 
-[Example](notebook_Exam/01_titanic/XAI_Example.ipynb)
+[Example](pdp/notebook_exam/01_titanic/XAI_Example.ipynb)
 
 ---
 ## 참고 
