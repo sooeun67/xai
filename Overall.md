@@ -114,7 +114,8 @@ Trade-Off : To maximize performance, we use high-capability model. But it is har
 | SHapley Additive exPlanations (SHAP)     | Agnostic       | Local/Global      | [Example](notebook_Exam/01_titanic/XAI_Example.html) |
 | Local Interpretable Model Explanations (LIME)     | Agnostic-Surrogate       | Local      |
 | Layer-wise Relevance Propagation (LRP)     | DL Agnostic     | Local      |
-Example](notebook_Exam/01_titanic/XAI_Example.ipynb)
+
+[Example](notebook_Exam/01_titanic/XAI_Example.ipynb)
 
 ---
 ## 참고 
