@@ -92,12 +92,12 @@ Trade-Off : To maximize performance, we use high-capability model. But it is har
 ---
 
 ## Model-Agnostic Methods
-- [Permutation Feature Importance (PFI)](pfi/01.Permutation_FI.md)
-- [Partial Dependence Plot (PDP)](pdp/02.PDP_ICE.md)
-- [Individual Conditional Expectation (ICE)](pdp/02.PDP_ICE.md)
-- Local Interpretable Model-agnostic Explanations (LIME) -- 
-- SHAP (Shapley Additive explanations) -- 
-- FV and LRP (Filter Visualization and Layer Relevance Propagation) -- 
+하기 기술들과 용어들을 정리하면 아래 표와 같음. 상세부분은 각 기술들의 Link 참조
+- Permutation Feature Importance (PFI)
+- Partial Dependence Plot (PDP) and Individual Conditional Expectation (ICE)
+- Local Interpretable Model-agnostic Explanations (LIME)
+- SHAP (Shapley Additive explanations)
+- FV and LRP (Filter Visualization and Layer Relevance Propagation)
 
 ```
 - Agnostic : 모든 모델에 적용되는 ~
@@ -105,13 +105,13 @@ Trade-Off : To maximize performance, we use high-capability model. But it is har
 - Local : 단일 instance (개별 데이터) 에 대해 설명가능한 ~
 - Global : 모든 instance 에 대해 종합 설명가능한 ~
 ```
-| Tech.Name | Model Dependency | Global/Local |
-| :---         |     :---:      |          :---: |
-| Feature Importance (FI)   | Specific     | Global    |
-| Permutation FI (PFI)  | Agnostic     | Global    |
-| Partial Dependent Plot   | Agnostic     | Global    |
-| Individual Conditional Expectation (ICE)     | Agnostic       | Local      |
-| SHapley Additive exPlanations (SHAP)     | Agnostic       | Local/Global      |
+| Tech.Name | Model Dependency | Global/Local | NoteBook Example |
+| :---         |     :---:      |          :---: |     :---:      |
+| Feature Importance (FI)   | Specific     | Global    | [Example](notebook_Exam/01_titanic/XAI_Example.html) |
+| [Permutation FI (PFI)](pfi/01.Permutation_FI.md)  | Agnostic     | Global    | [Example](notebook_Exam/01_titanic/XAI_Example.html) |
+| [Partial Dependent Plot (PDP)](pdp/02.PDP_ICE.md)   | Agnostic     | Global    | [Example](notebook_Exam/01_titanic/XAI_Example.html) |
+| [Individual Conditional Expectation (ICE)](pdp/02.PDP_ICE.md)      | Agnostic       | Local     |  [Example](notebook_Exam/01_titanic/XAI_Example.html) |
+| SHapley Additive exPlanations (SHAP)     | Agnostic       | Local/Global      | [Example](notebook_Exam/01_titanic/XAI_Example.html) |
 | Local Interpretable Model Explanations (LIME)     | Agnostic-Surrogate       | Local      |
 | Layer-wise Relevance Propagation (LRP)     | DL Agnostic     | Local      |
 
