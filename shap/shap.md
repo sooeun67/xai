@@ -51,6 +51,8 @@
 
 ### 시각화
 
+#### 시각화 1) Titanic
+
 ![SHAP 시각화1](https://github.com/sooeun67/xai/blob/main/shap/SHAP_summary_01.jpg)
 - SHAP summary plot (SHAP Feature Importance)
 	- |SHAP value| : 모델의 예측값에 기여하는 Feature의 기여도를 동일한 Unit의 수치로 표현, 해당 Plot에서는 절대값을 취한다.
@@ -97,6 +99,12 @@
 	- 마우스 이동을 통해 각 instance의 값을 확인할 수 있다.
 
 
+#### 시각화 2) MNIST
+
+![SHAP 시각화6](https://github.com/sooeun67/xai/blob/main/shap/SHAP_deep_explainer.png)
+- SHAP image plot : Plots SHAP values for image inputs.
+	- 좌측에는 input image가 표현되며,
+	- 우측에는 각 클래스별 예측 결과를 SHAP Value를 통해 표현한다.
 
 Ref.
 
