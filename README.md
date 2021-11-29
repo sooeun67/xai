@@ -36,7 +36,7 @@ DL 전용방법론, 어떠한 모델이든 훈련된 모델 자체를 해석하�
 Trade-Off : To maximize performance, we use high-capability model. But it is hard to explain the result
 
 - 데이터의 복잡도가 높아지며 Capacity가 높은 모델이 성능이 좋음. 그러나 설명하기는 더욱 힘들어짐.
-- 설명을 위해 Capacity가 낮은 모델을 사용하는 경우 복잡한 데이터에 대한 성능이 저하되어 실적용히 힘듦어짐.
+- 설명을 위해 Capacity가 낮은 모델을 사용하는 경우 복잡한 데이터에 대한 성능이 저하되어 실적용 힘듦어짐.
 - Linear/Logistic Regression, Decision Tree, kNN 등이 대표적인 설명이 상대적으로 용이하나 복잡한 데이터에 대해 성능이 떨어지는 Model Specific Interpretation 영역에 속함
 
 > <img src="xai_intro/images/interpretability_Acc.png" alt="drawing" style="width:600px;"/>
@@ -47,36 +47,35 @@ Trade-Off : To maximize performance, we use high-capability model. But it is har
 ### Model Specific Interpretation
 > <img src="xai_intro/images/model_specific.png" alt="drawing" style="width:600px;"/>
 
-#### Linear Regression (이론적으로 해석이 가능)
-- 상관계수(𝛽)를 ‘해석력’지표로서 간단히 참고가능
+#### Linear Regression (이론적 해석 가능)
+- 상관계수(𝛽)를 ‘해석력’지표로 사용
 - t-statistic 등 고전통계기법으로 𝛽의 유의성 검증 가능
 - 독립변수인 경우 인자별 민감도 (크기 및 (±)) 효과 및 종합 효과를 파악 가능
 - 비선형관계 파악을 위해서는 x 에 대한 조작이 필요 
   - 독립변수화 (변수의 직교화, PCA 등)
   - Feature Engineering (선형화 등)
 
-#### Decision Tree (설명이가능)
+#### Decision Tree (설명 가능)
 - 모델의 의사결정 과정을 자연스럽게 파악 가능
 - 변수의 criteria에 따라 어떠한 결과에 도달하는지 직관적으로 파악
 - 어떠한 변수가 지속적으로 중요변수인지 직관적인 파악
 
-#### Tree Ensemble Models (해석은 가능하나 어려움)
-- Random forest, Gradient Boosting tree
-- 앞선 두 방법보다 복잡한 데이터에 대해서 좋은 성능을 냄
+#### Tree Ensemble Models (설명 가능하나 비효율적)
+- Random forest, Gradient Boosting tree 등 앞선 두 방법보다 복잡한 데이터에 대해서 좋은 성능을 냄
 - Tree 분기 시 해당 변수의 평균적인 불순도 감소량을 통해 변수중요도로 파악
 - 내부 Tree 별 Decision Tree Stucture를 활용한 설명방법이 존재하나 Tree별로 보기 힘든 부분이 존재
 
 
 #### 대표적인 해석가능한 모델들의 아쉬운 점
-- 모델별 해석방법이 해당 모델에 종속되어 있기에, 다른 모델간 비교가 어려움
+- 모델별 해석방법이 해당 모델에 종속되어 있기에 (Model-Specific), 다른 모델간 비교가 어려움
 - 설명하기 쉬운 모델일수록 성능이 아쉬운 경우가 많음. (성능 중심인 경우 설명이 어려움)
-
+- 복잡한 모델을 설명하기 위한 clue로 이들을 대안모델로 사용하는 경우에도 Local 해석이 되지 않는 한계가 존재 (Global Surrogate Analysis)
 ---
 
 ## Model Agnostic Interpretation
 - 원래 모델을 Black-box 모델로 본다
   - White-box 모델에서 행하던 방식처럼 모델 내부 변수 및 계수에 접근하지 않음. (Model Specific - Linear 모델의 Beta 계수 및 상관관계 해석하지 않음)
-  - 모델의 input을 조절하며 output을 고찰, output 이나 원래값과의 차이 변동에 대해서 해석
+  - 모델의 input을 조절하며 output을 고찰, 모델의 Feature 사용/미사용에 대한 output 변동에 대해서 해석
 > <img src="xai_intro/images/model_agnostic.png" alt="drawing" style="width:600px;"/>
 
 
@@ -87,7 +86,7 @@ Trade-Off : To maximize performance, we use high-capability model. But it is har
 
 
 #### 복합모델 Ensemble 및 Stacking (기존의 방법으로 해석 불가능)
-- Ensemble 에 사용되는 단일 알고리즘 자체가 D/L, XGB 등의 해석이 힘들거나 불가능한 모델들로 구성되어 해석이 거의 불가능함! 
+- 현재의 복합모델은 Ensemble 에 사용되는 단일 알고리즘 자체가 D/L, XGB 등의 해석이 힘들거나 불가능한 모델들로 구성되어 해석이 거의 불가능함! 
 
 ---
 
@@ -111,8 +110,8 @@ Trade-Off : To maximize performance, we use high-capability model. But it is har
 | [Permutation FI (PFI)](pfi/01.Permutation_FI.md)  | Agnostic     | Global    |[↑](pdp/notebook_exam/01_titanic/XAI_Example.html) ||
 | [Partial Dependent Plot (PDP)](pdp/02.PDP_ICE.md)   | Agnostic     | Global    |[↑](pdp/notebook_exam/01_titanic/XAI_Example.html) ||
 | [Individual Conditional Expectation (ICE)](pdp/02.PDP_ICE.md)      | Agnostic       | Local     |[↑](pdp/notebook_exam/01_titanic/XAI_Example.html) ||
-| [SHapley Additive exPlanations (SHAP)](shap/shap.md)     | Agnostic       | Local/Global      | [↑](pdp/notebook_exam/01_titanic/XAI_Example.html) | [MNIST example](https://github.com/sooeun67/xai/blob/main/shap/PyTorch_SHAP.ipynb) |
 | [Local Interpretable Model Explanations (LIME)](lime/lime.md)     | Agnostic-Surrogate       | Local      | [Titanic Example](lime/titanic/titanic_lime.ipynb) | [MNIST example](lime/mnist/LIME_with_MNIST.ipynb)|
+| [SHapley Additive exPlanations (SHAP)](shap/shap.md)     | Agnostic       | Local/Global      | [↑](pdp/notebook_exam/01_titanic/XAI_Example.html) | [MNIST example](https://github.com/sooeun67/xai/blob/main/shap/PyTorch_SHAP.ipynb) |
 | Layer-wise Relevance Propagation (LRP)     | DL Agnostic     | Local      || [MNIST example](lrp/LRP_mnist.ipynb)|
 
 
