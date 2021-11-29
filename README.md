@@ -1,134 +1,132 @@
+# Explainable Artificial Intelligence [XAI]
+<b>XAI</b> - "설명 가능한 인공지능"
+> - 1975년, '설명 가능한 의사 결정 체계'의 용어 등장, Shortliffe. Edward H., and Bruce G. Buchanan . "A model of inexact reasoning in medicine." Mathematical biosciences 23.3-4(1975)
+> - 2004년, "XA"I 용어 등장, Michel van Lent, Willian Fisher and Michael Mancuso. "An explainable artificial intelligence system for small-unit tactical behavior.", Proceedings of the National Conference on Artificial Intelligence. Menlo Park, 2004 
+> - 2016년, DARPA (Depense Advanced Research Projects Agency), Project BAA-16-53, Explainable Artificial Intelligence, XAI. (~Y21) : 참조 https://ojs.aaai.org/index.php/aimagazine/article/view/2850
+> <img src="xai_intro/images/darpa_intro2.png" alt="drawing" style="width:600px;"/>
+
+Accuracy 와 Explainability 의 Trade-Off 관계에 따라 실제 프로젝트에서 분석가들이 적용하는 알고리즘에 대한 고민이 깊어짐
+DL 전용방법론, 어떠한 모델이든 훈련된 모델 자체를 해석하는 기법 그리고 어떠한 모델이든 훈련된 모델의 대안모델을 통해 해석하는 기법 중심으로 발전하고 있음.
+> <img src="xai_intro/images/darpa_intro.png" alt="drawing" style="width:600px;"/>
+
+현재 State of The Art (SOTA)로 평가되는 것은 SHAP로 보이며 각종 platform에 이 기법이 장착되고 있는 추세.
+아래는 MS-AZURE 경우이며 이 외 Python-Orange3 의 plug-in 으로 SHAP, Explain 이 이미 제작되어 있음.
+> <img src="xai_intro/images/Azure_shap.png" alt="drawing" style="width:600px;"/>
+
+## Interpretability/explainability
+- Explainability: possibility to explain from a technical point of view the prediction of an algorithm.
+- Interpretability: the ability to explain or provide meaning in terms that are understandable by a human being.
+- Transparency: a model is considered transparent if it is understandable on its own.
+
+``` 
+- Interpretability is the degree to which a human can understand the cause of a decision. 
+- Another one is: Interpretability is the degree to which a human can consistently predict the model’s result.  
+- The higher the interpretability of a machine learning model, the easier it is for someone to comprehend why certain decisions or predictions have been made.  
+- A model is better interpretable than another model if its decisions are easier for a human to comprehend than decisions from the other model.   
+- Christoph Molnar use the terms interpretable and explainable interchangeably like Miller (2017) But "Explanation" was used for explanations of individual predictions
+- https://christophm.github.io/interpretable-ml-book/interpretability.html
+```
+
+---
+
+## Model Specific Interpretation VS. Model Agnostic Interpretation
+기존 모델자체를 해석하려는 방법, 그리고 이제 XAI 기법을 통한 범용모델 해석방법을 고찰해보자
+
+### Accuracy VS. Explainablity
+Trade-Off : To maximize performance, we use high-capability model. But it is hard to explain the result
+
+- 데이터의 복잡도가 높아지며 Capacity가 높은 모델이 성능이 좋음. 그러나 설명하기는 더욱 힘들어짐.
+- 설명을 위해 Capacity가 낮은 모델을 사용하는 경우 복잡한 데이터에 대한 성능이 저하되어 실적용히 힘듦어짐.
+- Linear/Logistic Regression, Decision Tree, kNN 등이 대표적인 설명이 상대적으로 용이하나 복잡한 데이터에 대해 성능이 떨어지는 Model Specific Interpretation 영역에 속함
+
+> <img src="xai_intro/images/interpretability_Acc.png" alt="drawing" style="width:600px;"/>
 
 
-# XAI
-Explainable Artificial Intelligence(XAI) algorithms / research papers
+---
 
-## 대리분석 (Surrogate Analysis)
-본래 기능을 흉내내는 간단한 대체재를 만들어 prototype이 동작하는지 판단하는 분석기법
-![모델 f를 흉내내는 g1과 g2](https://github.com/sooeun67/xai/blob/main/images/surrogate_analysis.png)
+### Model Specific Interpretation
+> <img src="xai_intro/images/model_specific.png" alt="drawing" style="width:600px;"/>
 
-다시 말해, 블랙 박스 모델 f 가 존재하고, f를 흉내 내는 해석 가능한 ML 모델 g 를 만드는 것이 대리 분석의 목표. 모델 f 가 SVM을 사용해 학습한 모델이라면 모델 g 는 트리나 linear regression 일 수도 있다. 모델 g의 결정 조건은 (1) f 보다 학습하기 쉽고 (2) 설명 가능하며 (3) 모델 f 를 유사하게 흉내낼 수 있으면 된다
+#### Linear Regression (이론적으로 해석이 가능)
+- 상관계수(𝛽)를 ‘해석력’지표로서 간단히 참고가능
+- t-statistic 등 고전통계기법으로 𝛽의 유의성 검증 가능
+- 독립변수인 경우 인자별 민감도 (크기 및 (±)) 효과 및 종합 효과를 파악 가능
+- 비선형관계 파악을 위해서는 x 에 대한 조작이 필요 
+  - 독립변수화 (변수의 직교화, PCA 등)
+  - Feature Engineering (선형화 등)
 
-- **장점**:
-	- model-agnostic: 모델에 대한 지식 없이 학습 가능
-	- 적은 학습 데이터로도 ok! (학습 데이터, 예측 모델만 있으면 됨)
-	- 모델이 바뀌더라도 feature 만 같다면 대리 분석 수행 가능
+#### Decision Tree (설명이가능)
+- 모델의 의사결정 과정을 자연스럽게 파악 가능
+- 변수의 criteria에 따라 어떠한 결과에 도달하는지 직관적으로 파악
+- 어떠한 변수가 지속적으로 중요변수인지 직관적인 파악
 
-### 로컬 대리분석 (Local Surrogate)
-데이터 하나에 대해 원래 모델인 블랙박스 모델이 분류한 결과를 해부하고 해석하는 과정을 분석하는 기법으로 대표적으로 **LIME** 과 **SHAP** 이 있다
-
-## [LIME](https://github.com/marcotcr/lime) (Local Interpretable Model-agnostic Explanation)
-
-- LIME 은 input data 에 대해 부분적으로 변화(permutation)를 준다
-- 40명의 얼굴을 학습한 후, 어떤 인풋 이미지가 들어왔을 때 40명 중 한 명을 구분하는 모델이 있다고 가정하자. 이때 어떤 이미지 x 가 모델 입력값으로 들어온다면 LIME은 입력 이미지에 대해 아래와 같이 해석 가능하도록 인식 단위를 쪼개고 이미지를 해석한다
-![lime_1](https://github.com/sooeun67/xai/blob/main/images/lime_1.png)
-
-이렇게 나뉜 영역(슈퍼픽셀)을 조합해서 원본 블랙박스 모델 f의 예측 결과와 가장 유사한 대표 이미지를 구성
-![lime_4](https://github.com/sooeun67/xai/blob/main/images/lime_4.png)
-
-어떤 이미지가 입력 값으로 주어졌을 때, 이미지 내 특정 관심 영역을 x라 하고, 초점 주변으로 관심 영역을 키워갈 때 기준 x 로부터 동일한 정보를 가지고 있다고 간주할 수 있을 때, 이 영역을 πx​이라 하고 이를 슈퍼 픽셀(super pixel)이라 한다
+#### Tree Ensemble Models (해석은 가능하나 어려움)
+- Random forest, Gradient Boosting tree
+- 앞선 두 방법보다 복잡한 데이터에 대해서 좋은 성능을 냄
+- Tree 분기 시 해당 변수의 평균적인 불순도 감소량을 통해 변수중요도로 파악
+- 내부 Tree 별 Decision Tree Stucture를 활용한 설명방법이 존재하나 Tree별로 보기 힘든 부분이 존재
 
 
-### 장점
-- model-agnostic: 모델에 대한 지식 없이 학습 가능
-- Deep Learning 이나 GPU 사용하지 않고 적용 가능한, 가벼운 XAI 기법
-- matrix 로 표현 가능한 데이터(text/image)에 작동하는 기법
+#### 대표적인 해석가능한 모델들의 아쉬운 점
+- 모델별 해석방법이 해당 모델에 종속되어 있기에, 다른 모델간 비교가 어려움
+- 설명하기 쉬운 모델일수록 성능이 아쉬운 경우가 많음. (성능 중심인 경우 설명이 어려움)
 
-### 단점 및 고려사항
-- **불확실성**: 슈퍼 픽셀 알고리즘에 따라 마스킹 데이터가 달라지며, 모델 g는 sampling 위치에 따라 random한 결과를 보일 수 있다 --> ***non-deterministic*** (even for the same input, algoirthm can exhibit different behaviors/output)
-- 데이터 하나에 대한 설명이기 때문에 모델 전체에 대한 일관성을 보전하지 못한다
-> **Note:** [논문](https://arxiv.org/pdf/1602.04938.pdf)에서 SP-LIME(서브모듈러 최적화) 알고리즘을 통해 데이터 셋 전체를 대표하는  예시들을 뽑아 신뢰가 갈만한 모델을 만드는 기법 소개
+---
 
-
-### 샘플 (To Do: use case  주피터 노트북 추가 )
-- Data: 뉴스 기사와 해당 기사의 20가지의 카테고리
-- 아래는 LIME 출력 결과물
---  88-89와 SE 모델이 자동차(auto) 카테고리를 결정하는 서브모듈러(highlighted)
-![lime_result](https://github.com/sooeun67/xai/blob/main/images/lime_result.png)
+## Model Agnostic Interpretation
+- 원래 모델을 Black-box 모델로 본다
+  - White-box 모델에서 행하던 방식처럼 모델 내부 변수 및 계수에 접근하지 않음. (Model Specific - Linear 모델의 Beta 계수 및 상관관계 해석하지 않음)
+  - 모델의 input을 조절하며 output을 고찰, output 이나 원래값과의 차이 변동에 대해서 해석
+> <img src="xai_intro/images/model_agnostic.png" alt="drawing" style="width:600px;"/>
 
 
-## [SHAP](https://github.com/slundberg/shap)
-- Shapely Value: 전체 성과를 창출하는 데 각 참여자가 얼마나 공헌했는지를 수치로 표현. 각 사람의 기여도는 그 사람의 기여도를 제외했을 때의 전체 성과 변화 정도로 나타낼 수 있다
-- 원리: 모델이 표현할 수 있는 모든 조합과 feature 
-- 
-![shap](https://github.com/sooeun67/xai/blob/main/images/shap.png)
-- 예시) 집값을 결정짓는 요인으로 [숲세권, 면적/층, 고양이 양육가능여부] Feature 존재
--- '고양이 양육가능여부' 의 집값에 대한 기여도를 평가해보자
--- 나머지 feature 들이 동일하다는 전제 하에, 310,000 (`cat-banned`) - 320,000 (`cat-allowed`) = -10,000
--- 다시 말해, `cat-banned` 의 기여도는 -10,000 유로
--- 이 계산 과정을 모든 가능한 combination 에 대해 반복 
-
-### 장점
-- model-agnostic: 다양한 모델에 적용 가능
-- consistent: 계산할 때마다 같은 결과 출력
-- negative(-) 기여도 계산 가능 
-- Local Explanation 을 기반으로 하여, 데이터의 **전체적인 영역에 대한 해석(Global Surrogate)** 이 가능하다는 게 LIME과의 차이
-
-### 단점 및 고려사항
-- 계산 시간: 모든 조합에 대해 연산하고 missing feature 시뮬레이션 하기 때문에
+#### Deep Neural Network (기존의 방법으로 해석 불가능)
+- 사실상 Black-box 모델이며 해석하기 어려운 모델! 
+- Attention, Class-Activation-Map 등 추가적인 구조를 통한 해석이 가능
+  - 단, 추가적인 모델 구조 변경이 필요
 
 
-## [LRP](Layer-wise Relevance Propagation)
-- **결과를 역추적해서 입력 이미지에 히트맵을 출력**
-- DNN 출력 값을 Decomposition하여 각각의 피처에 대한 기여도(relevance score)를 계산
--  Relevance score를 Output layer에서 Input layer 방향으로 계산해나가며 그 비중을 재분배하는 방법
-- 모든 모델에 적용 가능
+#### 복합모델 Ensemble 및 Stacking (기존의 방법으로 해석 불가능)
+- Ensemble 에 사용되는 단일 알고리즘 자체가 D/L, XGB 등의 해석이 힘들거나 불가능한 모델들로 구성되어 해석이 거의 불가능함! 
 
-- 잘 훈련된 네트워크에 input(x):수탉 사진/ouput(f(x)):'수탉'이 경우, 이 '수탉'이라는 출력 f(x)를 얻기 위해 입력 샘플의 각 pixel들이 기여하는 바를 계산하는 방법
-- 아래의 그림1에서 보이는 것처럼 heatmap이라고 적힌 그림에 pixel들의 기여도(relevance score)가 색깔로 표시되며, 수탉의 부리나 머리 등을 보고 해당 입력의 클래스가 '수탉'임을 출력했다는 것을 알 수 있음
-![lrp_example](https://user-images.githubusercontent.com/12220234/142083511-32da108a-b6d5-4827-879a-00e89f55238a.png)
+---
 
-### 장점
-- 비교적 직관적
-- CNN/RNN 등 다양한 네트워크에 사용가능 
+## Model-Agnostic Methods
+하기 기술들과 용어들을 정리하면 아래 표와 같음. 상세부분은 각 기술들의 Link 참조
+- Permutation Feature Importance (PFI)
+- Partial Dependence Plot (PDP) and Individual Conditional Expectation (ICE)
+- Local Interpretable Model-agnostic Explanations (LIME)
+- SHAP (Shapley Additive explanations)
+- FV and LRP (Filter Visualization and Layer Relevance Propagation)
 
-### 단점
-- 기여도의 해석일 뿐 설명이 되려면 추가적인 맥락이 요구됨. 일일이 히트맵으로 기여도를 보고 객체를 인식해야 한다는 번거로움
-출력에 가까운 은닉층일수록 히트맵으로 나타난 추상적 개념은 해석이 어려움
+```
+- Agnostic : 모든 모델에 적용되는 ~
+- Surrogate : 모든 모델에 적용될 수 있도록 대안모델을 만들어 해석하는 ~
+- Local : 단일 instance (개별 데이터) 에 대해 설명가능한 ~
+- Global : 모든 instance 에 대해 종합 설명가능한 ~
+```
+| Tech.Name | Model Dependency | Global/Local | NoteBook Example |
+| :---         |     :---:      |          :---: |     :---:      |
+| Feature Importance (FI)   | Specific     | Global    | [Example](pdp/notebook_exam/01_titanic/XAI_Example.html) |
+| [Permutation FI (PFI)](pfi/01.Permutation_FI.md)  | Agnostic     | Global    | [Example](pdp/notebook_exam/01_titanic/XAI_Example.html) |
+| [Partial Dependent Plot (PDP)](pdp/02.PDP_ICE.md)   | Agnostic     | Global    | [Example](pdp/notebook_exam/01_titanic/XAI_Example.html) |
+| [Individual Conditional Expectation (ICE)](pdp/02.PDP_ICE.md)      | Agnostic       | Local     |  [Example](pdp/notebook_exam/01_titanic/XAI_Example.html) |
+| [SHapley Additive exPlanations (SHAP)](shap/shap.md)     | Agnostic       | Local/Global      | [Example-Titanic](pdp/notebook_exam/01_titanic/XAI_Example.html)[Example-MNIST]() |
+| [Local Interpretable Model Explanations (LIME)](lime/lime.md)     | Agnostic-Surrogate       | Local      | [Titanic Example](lime/titanic/titanic_lime.ipynb) / [MNIST example](lime/mnist/LIME_with_MNIST.ipynb)
+| Layer-wise Relevance Propagation (LRP)     | DL Agnostic     | Local      | [MNIST example](lrp/LRP_mnist.ipynb)
 
-### sample
-- https://lrpserver.hhi.fraunhofer.de/handwriting-classification
+[Example](pdp/notebook_exam/01_titanic/XAI_Example.ipynb)
 
-## [FV] (Filter Visualization)
+---
+## 참고 
+- [서적] XAI 설명가능한 인공지능, 인공지능을 해부하다, 안재현, 위키복스, 2020
+- [서적/WEB] Explainable AI 기법에 대한 Global/Local Review <https://christophm.github.io/interpretable-ml-book/>
+- [WEB] 전반적인 AI 기법에 대한 이론적 설명 - dmqa.korea.ac.kr
+- [WEB] PDP/ICE - https://scikit-learn.org/stable/modules/partial_dependence.html#
+- [WEB] LIME https://github.com/marcotcr/lime
+- [WEB] SHAP https://github.com/slundberg/shap
+- [WEB] States of the ART tech. [https://paperswithcode.com/sota]
+- [WEB] XAI 설명 및 최근동향 https://medium.com/swlh/push-the-limits-of-explainability-an-ultimate-guide-to-shap-library-a110af566a02
+- [Journal] Explainable Artificial Intelligence (XAI): Concepts, Taxonomies, Opportunities and Challenges toward Responsible AI,  Arrieta, 2019 https://arxiv.org/pdf/1910.10045.pdf
 
-### Filter
-![image](https://user-images.githubusercontent.com/12220234/142094772-7d22112a-fe88-4fa3-ae42-bf14a74e7d75.png)
-- 필터는 원본 이미지에서 특정 요소를 추출하기 위해 사용하는 것으로, 주파수 필터을 함.
-- 다섯번 째 그림은 저주파만 통과하기 때문에 블러리한 이미지를 결과로 얻으며, 세번째 그림인 Laplace Filter는 Edge를 찾는 역할. 네번째 그림인 high-pass filter는 이미지가 선명해지는 결과를 얻음.
-- **즉, 학습된 CNN 필터들은 이런식으로 경계선을 찾거나 블러리한 면을 찾는 등 다양한 주파수 필터의 기능을 한다.**
-- **피처맵 시각화 방식으로, 모델이 입력 이미지에 어떻게 반응하는지 조사하는 방법**
-
-### Occlusion Experiment(Zeiler & Fergus 2013)
-![image](https://user-images.githubusercontent.com/12220234/142085160-81dd04e3-489a-4dc5-9aa0-af6f067cc23d.png)
-- 위 그림은 image의 *어떤 부분이 이미지 분류에 큰 영향*을 미치는지 알아본 결과
-- 방법: (a)와 같은 input image가 있을 때, 작은 회색 상자를 그리고,모델에 통과시켜서 나온 결과를 기록 -> 이 회색상자를 조금씩 이동시키면서 위 과정을 반복 
-- 결과: 결과를 heatmap으로 시각화한 것이 (d), (e)로, (d)는 회색상자로 일부가 지워진 그림이 포메라니안일 확률이 높으면 빨간색이고, 낮으면 파란색
-- 즉, 파란색으로 부분이 지워지면 포메라니안으로 분류될 확률이 낮으므로 이 부분이 분류 결과를 결정하는 중요한 부분임을 암시함. Input image에서 파란 부분은 강아지의 얼굴
-- 결론: 본 실험은 CNN이 사람이 물체를 인식하는 과정과 유사하다는 것을 검증
-
-### CAM visualization(2016)
-- 학습한 네트워크가 이미지를 개라고 판별할 때와 고양이라고 판별할 때, 각각 이미지에서 중요하게 생각하는 영역은 다를 것입니다. 이를 시각화해주는 알고리즘이 바로 Class Activation Map (CAM) 관련 알고리즘들입니다. CNN 모델이 어느 곳을 보고 있는지를 알려주는 weak supervised learning 알고리즘 (CAM, Grad-CAM)
-
-![2019 Seminar-18](https://user-images.githubusercontent.com/12220234/142095727-483622ea-9fcb-433e-af6e-436492593769.jpg)
-
-### 장점
-- (추후 추가 예정)
-
-### 단점
-- 깊은 은닉 계층일수록 해석력이 떨어짐
-- 해석자마다 해석 방법이 다를 수 있음
-
-
--------
-#### Reference (참고문헌)
-- LIME paper: https://arxiv.org/pdf/1602.04938.pdf
-- XAI 설명가능한 인공지능 도서
-- https://velog.io/@tobigs_xai/1%EC%A3%BC%EC%B0%A8-LIME-%EB%85%BC%EB%AC%B8-%EB%A6%AC%EB%B7%B0-Why-Should-I-Trust-You-Explaining-the-Predictions-of-Any-Classifier
-- https://yjjo.tistory.com/3#:~:text=SP%2DLIME%3A%20%EB%AA%A8%ED%98%95%20%EC%A0%84%EC%B2%B4%EC%9D%98,%EB%A5%BC%20%EC%84%A0%ED%83%9D%ED%95%B4%EC%A3%BC%EB%8A%94%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9E%85%EB%8B%88%EB%8B%A4.
-- 
-- lrp paper: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0130140
-- https://angeloyeo.github.io/2019/08/17/Layerwise_Relevance_Propagation.html
-
-- CAM :https://tyami.github.io/deep%20learning/CNN-visualization-Grad-CAM/
-- https://velog.io/@tobigs_xai/2%EC%A3%BC%EC%B0%A8-SHAP-SHapley-Additive-exPlanation
 
