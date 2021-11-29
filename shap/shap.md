@@ -74,9 +74,6 @@
 		- Fare : x축의 각 Point는 Feature(=Fare)의 실제 값(Value)을 표현한다.
 		- Sex : 각 (x, y)의 Point의 색으로 Sex의 Value를 표현한다. (붉은색 1, 파란색 0)
 		- SHAP value : 모델의 예측값에 기여하는 Feature의 기여도를 동일한 Unit의 수치로 표현
-	- Sex : Feature의 값이 높을 수록(=남성) SHAP Value 는 Negative값을 가진다 (생존률의 예측 결과값에 '-' 기여함) 
-	- Pclass : Feature의 값이 높을 수록(=등급이 낮을 수록) SHAP Value 는 Negative값을 가진다 (생존률의 예측 결과값에 '-' 기여함) 
-	- Age : Feature의 값이 높을 수록(=나이가 많을 수록) SHAP Value 는 Negative값을 가진다 (생존률의 예측 결과값에 '-' 기여함)
 
 ![SHAP 시각화4](https://github.com/sooeun67/xai/blob/main/shap/SHAP_force_01.png) 
 - SHAP Force plot (개별 인스턴스에 대해 예측 결과값에 대한 해석을 제공)
