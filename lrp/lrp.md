@@ -56,3 +56,37 @@ LRP(Layer-wise Relevance Propagation)의 이름에서 볼 수 있듯이 이 meth
 ### sample
 - https://lrpserver.hhi.fraunhofer.de/handwriting-classification
 
+
+## [FV] (Filter Visualization)
+
+### Filter
+![image](https://user-images.githubusercontent.com/12220234/142094772-7d22112a-fe88-4fa3-ae42-bf14a74e7d75.png)
+- 필터는 원본 이미지에서 특정 요소를 추출하기 위해 사용하는 것으로, 주파수 필터을 함.
+- 다섯번 째 그림은 저주파만 통과하기 때문에 블러리한 이미지를 결과로 얻으며, 세번째 그림인 Laplace Filter는 Edge를 찾는 역할. 네번째 그림인 high-pass filter는 이미지가 선명해지는 결과를 얻음.
+- **즉, 학습된 CNN 필터들은 이런식으로 경계선을 찾거나 블러리한 면을 찾는 등 다양한 주파수 필터의 기능을 한다.**
+- **피처맵 시각화 방식으로, 모델이 입력 이미지에 어떻게 반응하는지 조사하는 방법**
+
+### Occlusion Experiment(Zeiler & Fergus 2013)
+![image](https://user-images.githubusercontent.com/12220234/142085160-81dd04e3-489a-4dc5-9aa0-af6f067cc23d.png)
+- 위 그림은 image의 *어떤 부분이 이미지 분류에 큰 영향*을 미치는지 알아본 결과
+- 방법: (a)와 같은 input image가 있을 때, 작은 회색 상자를 그리고,모델에 통과시켜서 나온 결과를 기록 -> 이 회색상자를 조금씩 이동시키면서 위 과정을 반복 
+- 결과: 결과를 heatmap으로 시각화한 것이 (d), (e)로, (d)는 회색상자로 일부가 지워진 그림이 포메라니안일 확률이 높으면 빨간색이고, 낮으면 파란색
+- 즉, 파란색으로 부분이 지워지면 포메라니안으로 분류될 확률이 낮으므로 이 부분이 분류 결과를 결정하는 중요한 부분임을 암시함. Input image에서 파란 부분은 강아지의 얼굴
+- 결론: 본 실험은 CNN이 사람이 물체를 인식하는 과정과 유사하다는 것을 검증
+
+### CAM visualization(2016)
+- 학습한 네트워크가 이미지를 개라고 판별할 때와 고양이라고 판별할 때, 각각 이미지에서 중요하게 생각하는 영역은 다를 것입니다. 이를 시각화해주는 알고리즘이 바로 Class Activation Map (CAM) 관련 알고리즘들입니다. CNN 모델이 어느 곳을 보고 있는지를 알려주는 weak supervised learning 알고리즘 (CAM, Grad-CAM)
+
+![2019 Seminar-18](https://user-images.githubusercontent.com/12220234/142095727-483622ea-9fcb-433e-af6e-436492593769.jpg)
+
+### 장점
+- (추후 추가 예정)
+
+### 단점
+- 깊은 은닉 계층일수록 해석력이 떨어짐
+- 해석자마다 해석 방법이 다를 수 있음
+
+### References
+- CAM :https://tyami.github.io/deep%20learning/CNN-visualization-Grad-CAM/
+- lrp paper: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0130140
+- https://angeloyeo.github.io/2019/08/17/Layerwise_Relevance_Propagation.html
