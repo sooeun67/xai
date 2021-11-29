@@ -51,20 +51,51 @@
 
 ### 시각화
 
-![SHAP 시각화1](https://christophm.github.io/interpretable-ml-book/images/shap-importance.png)
-- SHAP Feature Importance: 피쳐 중요도는 평균 절대 샤플리 값으로 측정된다. 위 결과에 따르면 호르몬 피임약을 사용한 연수가 가장 중요한 특징으로, 예측된 암 발생 확률을 평균 2.4%포인트 변경했다.(x축 : 0.024)
+![SHAP 시각화1](https://github.com/sooeun67/xai/blob/main/shap/SHAP_summary_01.jpg)
+- SHAP summary plot (SHAP Feature Importance)
+	- |SHAP value| : 모델의 예측값에 기여하는 Feature의 기여도를 동일한 Unit의 수치로 표현, 해당 Plot에서는 절대값을 취한다.
+	- Sex : 각 인스턴스가 가진 SHAP Value의 평균값이 1.2 수준을 가진다. (절대값이므로 '-', '+'와 무관하게 기여도의 크기만을 표현, 남1,여0) 
+	- Pclass : 각 인스턴스가 가진 SHAP Value의 평균값이 0.8 수준을 가진다. (절대값이므로 '-', '+'와 무관하게 기여도의 크기만을 표현) 
+	- Age : 각 인스턴스가 가진 SHAP Value의 평균값이 0.5 수준을 가진다. (절대값이므로 '-', '+'와 무관하게 기여도의 크기만을 표현)
 
-![SHAP 시각화2](https://christophm.github.io/interpretable-ml-book/images/shap-importance-extended.png) 
-- SHAP Summary Plot: 호르몬 피임약을 복용하는 기간이 적을수록 암의 위험이 감소하고, 많은 해가 되면 그 위험이 증가한다. 단, 위 결과는 모델의 결과를 보여주며 현실 세계에서 반드시 인과관계가 있는 것은 아니다.
+![SHAP 시각화2](https://github.com/sooeun67/xai/blob/main/shap/SHAP_summary_02.jpg)
+- SHAP summary plot
+	- Feature Value : 붉은색일 수록 높은 값을 가지고 있고, 파란색일 수록 낮은 값을 가지고 있다.
+	- SHAP value : 모델의 예측값에 기여하는 Feature의 기여도를 동일한 Unit의 수치로 표현
+	- Sex : Feature의 값이 높을 수록(=남성) SHAP Value 는 Negative값을 가진다 (생존률의 예측 결과값에 '-' 기여함)
+	- Pclass : Feature의 값이 높을 수록(=등급이 낮을 수록) SHAP Value 는 Negative값을 가진다 (생존률의 예측 결과값에 '-' 기여함)
+	- Age : Feature의 값이 높을 수록(=나이가 많을 수록) SHAP Value 는 Negative값을 가진다 (생존률의 예측 결과값에 '-' 기여함)
 
-![SHAP 시각화3](https://christophm.github.io/interpretable-ml-book/images/shap-dependence.png) 
-- SHAP Dependence Plot: 호르몬 피임약들에 대한 SHAP 의존도. 0년에 비해 몇 년은 예측 확률을 낮추고 높은 햇수는 예측된 암 확률을 높인다.
+![SHAP 시각화3](https://github.com/sooeun67/xai/blob/main/shap/SHAP_dependency_01.png) 
+- SHAP Dependence Plot (with Interaction Values)
+	- SHAP value for Fare : y축의 각 Point는 각 인스턴스의 Fare에 대한 SHAP Value를 표현한다. 
+		- Fare : x축의 각 Point는 Feature(=Fare)의 실제 값(Value)을 표현한다.
+		- Sex : 각 (x, y)의 Point의 색으로 Sex의 Value를 표현한다. (붉은색 1, 파란색 0)
+		- SHAP value : 모델의 예측값에 기여하는 Feature의 기여도를 동일한 Unit의 수치로 표현
+	- Sex : Feature의 값이 높을 수록(=남성) SHAP Value 는 Negative값을 가진다 (생존률의 예측 결과값에 '-' 기여함) 
+	- Pclass : Feature의 값이 높을 수록(=등급이 낮을 수록) SHAP Value 는 Negative값을 가진다 (생존률의 예측 결과값에 '-' 기여함) 
+	- Age : Feature의 값이 높을 수록(=나이가 많을 수록) SHAP Value 는 Negative값을 가진다 (생존률의 예측 결과값에 '-' 기여함)
 
-![SHAP 시각화4](https://christophm.github.io/interpretable-ml-book/images/shap-dependence-interaction.png) 
-- SHAP Interaction Values: SHAP 피쳐 의존도와 상호작용 시각화. 호르몬 피임약의 해는 성병과 상호작용을 한다. 0년에 가까운 경우, 성병의 발생은 예측된 암 위험을 증가시킨다. 피임약에서 더 많은 해 동안, 성병의 발생은 예측된 위험을 감소시킨다. 다시 말하지만, 이것은 인과 모델이 아니다. 효과는 교란 요인에 기인할 수 있다(예: 성병과 낮은 암 위험은 더 많은 의사 방문과 상관관계가 있을 수 있다).
+![SHAP 시각화4](https://github.com/sooeun67/xai/blob/main/shap/SHAP_force_01.png) 
+- SHAP Force plot (개별 인스턴스에 대해 예측 결과값에 대한 해석을 제공)
+	- base value : 해당 모델의 예측 평균값은 0.3361이다.
+	- f(x) = 0.14 : 해당 인스턴스(=관측치)의 예측값은 0.14로 평균보다 낮다 (생존 확률이 낮음)
+	- 각 bar(또는 화살표 표현)으로 각 예측값에 공헌한 Feature를 시각화 하였다. (red는 + 기여, blue는 - 기여)
+	- Sex = 1(남성) 이며 Pclass = 3(3등석)이 다른 여타 + 공헌도를 가지는 Feature보다 예측값(=생존율)의 하락을 가져오는데 기여하였다.
 
-![SHAP 시각화5](https://christophm.github.io/interpretable-ml-book/images/shap-clustering.png)
-- Clustering SHAP values : 설명 유사성으로 클러스터링된 스택형 SHAP. x축의 각 위치는 데이터의 인스턴스(instance)이다. 빨간색 SHAP 값은 예측을 증가시키고, 파란색 값은 예측을 감소시킨다. 오른쪽에는 암 발병 리스크가 높게 예측되는 그룹이 있다.
+![SHAP 시각화5](https://github.com/sooeun67/xai/blob/main/shap/SHAP_force_02.png) 
+- SHAP Force plot (개별 인스턴스에 대해 예측 결과값에 대한 해석을 제공)
+	- base value : 해당 모델의 예측 평균값은 0.3361이다.
+	- f(x) = 0.14 : 해당 인스턴스(=관측치)의 예측값은 0.90으로 평균보다 매우 높다 (생존 확률이 높음)
+	- 각 bar(또는 화살표 표현)으로 각 예측값에 공헌한 Feature를 시각화 하였다.(red는 + 기여, blue는 - 기여)
+	- Sex = 0(여성) 이며 Pclass = 1(2등석)이 다른 여타 + 공헌도를 가지는 Feature보다 예측값(=생존율)의 증가를 가져오는데 기여하였다.
+
+![SHAP 시각화5](https://github.com/sooeun67/xai/blob/main/shap/SHAP_clustering.png)
+- Clustering SHAP values : 설명 유사성으로 클러스터링된 스택형 SHAP.
+	- x축의 각 위치는 데이터의 인스턴스(instance)이다. 빨간색 SHAP 값은 예측을 증가시키고, 파란색 값은 예측을 감소시킨다. 
+	- 왼쪽에 생존율이 높은 그룹이 모여있으며, 중간으로 갈수록 생존율이 낮아지다가, 오른쪽으로 가면 생존율이 약간 상승한다.
+	- 마우스 이동을 통해 각 instance의 값을 확인할 수 있다.
+
 
 
 Ref.
