@@ -112,7 +112,7 @@ Trade-Off : To maximize performance, we use high-capability model. But it is har
 | [Partial Dependent Plot (PDP)](pdp/02.PDP_ICE.md)   | Agnostic     | Global    | [Example](pdp/notebook_exam/01_titanic/XAI_Example.html) |
 | [Individual Conditional Expectation (ICE)](pdp/02.PDP_ICE.md)      | Agnostic       | Local     |  [Example](pdp/notebook_exam/01_titanic/XAI_Example.html) |
 | [SHapley Additive exPlanations (SHAP)](shap/shap.md)     | Agnostic       | Local/Global      | [Example-Titanic](pdp/notebook_exam/01_titanic/XAI_Example.html)[Example-MNIST]() |
-| Local Interpretable Model Explanations (LIME)     | Agnostic-Surrogate       | Local      | [Titanic Example](lime/titanic/titanic_lime.ipynb)  [MNIST example](lime/mnist/LIME_with_MNIST.ipynb)
+| Local Interpretable Model Explanations (LIME)     | Agnostic-Surrogate       | Local      | [Titanic Example](lime/titanic/titanic_lime.ipynb) / [MNIST example](lime/mnist/LIME_with_MNIST.ipynb)
 | Layer-wise Relevance Propagation (LRP)     | DL Agnostic     | Local      |
 
 [Example](pdp/notebook_exam/01_titanic/XAI_Example.ipynb)
