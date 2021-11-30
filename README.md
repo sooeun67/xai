@@ -110,7 +110,7 @@ Trade-Off : To maximize performance, we use high-capability model. But it is har
 | [Permutation FI (PFI)](pfi/01.Permutation_FI.md)  | Agnostic     | Global    |[↑](pdp/notebook_exam/01_titanic/XAI_Example.ipynb) ||
 | [Partial Dependent Plot (PDP)](pdp/02.PDP_ICE.md)   | Agnostic     | Global    |[↑](pdp/notebook_exam/01_titanic/XAI_Example.ipynb) ||
 | [Individual Conditional Expectation (ICE)](pdp/02.PDP_ICE.md)      | Agnostic       | Local     |[↑](pdp/notebook_exam/01_titanic/XAI_Example.ipynb) ||
-| [Local Interpretable Model Explanations (LIME)](lime/lime.md)     | Agnostic-Surrogate       | Local      | [Titanic Example](lime/titanic/titanic_lime.ipynb) | [MNIST example](lime/mnist/LIME_with_MNIST.ipynb)|
+| [Local Interpretable Model Explanations (LIME)](lime/lime.md)     | Agnostic-Surrogate       | Local      | [↑](pdp/notebook_exam/01_titanic/XAI_Example.ipynb) [Titanic Example](lime/titanic/titanic_lime.ipynb) | [MNIST example](lime/mnist/LIME_with_MNIST.ipynb)|
 | [SHapley Additive exPlanations (SHAP)](shap/shap.md)     | Agnostic       | Local/Global      | [↑](pdp/notebook_exam/01_titanic/XAI_Example.html) | [MNIST example](https://github.com/sooeun67/xai/blob/main/shap/PyTorch_SHAP.ipynb) |
 | Layer-wise Relevance Propagation (LRP)     | DL Agnostic     | Local      || [MNIST example](lrp/LRP_mnist.ipynb)|
 
