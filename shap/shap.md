@@ -3,18 +3,19 @@
 
 ### Keyword
  - "(관심 데이터 xi에 대해) 변수 X1이 모델의 결과값(예측) P에 얼마나 기여를 할까?"
+ - <b>SHapley Additive</b> exPlanations
 
 ### 개요
 - Shapley Value를 기반으로 하는 XAI
 	- Lundberg와 Lee가 제안한 SHAP (SHapley Additive exPlanations)은 Shapley Vlues를 기반으로 예측 값에 대한 각 feature의 기여도를 계산하여 Black box 모델 해석 제공 [(논문링크1)](https://arxiv.org/pdf/1705.07874.pdf) [(논문링크2)](https://arxiv.org/pdf/1802.03888.pdf)
-	- Shapley Value : 하나의 특성에 대한 중요도를 알기위해 특성값들의 모든 조합을 구성하고 해당 특성의 유무에 따른 평균적인 Y 변화 값
+	- Shapley Value : 하나의 특성값에 대한 중요도를 알기위해 특성값들의 모든 조합을 구성하고 해당 특성값의 유무에 따른 평균적인 Y 변화 값
 	- 전체 성과를 창출하는 데 각 참여자가 얼마나 공헌했는지의 기여도는 그 사람을 제외했을 때의 전체 성과 변화 정도로 나타낼 수 있다
 
 
 ### 설명
 - SHAP의 목적은 예측에 대한 각 특성의 기여도를 계산하여 관측치 x의 예측값을 설명하는 것이다. 
 - SHAP 설명 방법은 연합 게임 이론(coalitional game theory)을 사용하여 Shaply value를 계산하는 방식이며, 이때 관측치(data instance)의 특성값은 연합 게임 이론의 플레이어 역할을 한다.
-- 다시 말해 Shaply Value는 특성들 사이에 “지불(payout) (=예측(prediction))”을 공정하게 분배하는 방법을 알려준다. 예를 들어 tabular data에서 플레이어는 각각의 특성값이 될 수 있으며 특성값의 그룹이 될 수도 있다. 
+- 다시 말해 Shaply Value는 특성들 사이에 “지불(payout) (=예측(prediction))”을 공정하게 분배하는 방법을 알려준다. 예를 들어 tabular data에서 플레이어는 각각의 특성값이 될 수 있으며 특성값의 그룹이 될 수도 있다. (아래 Calculation 예시 참조)
 - 이미지를 설명하기 위해 픽셀을 수퍼 픽셀(픽셀들의 그룹)로 그룹화하고 수퍼 픽셀 간의 예측값의 분포를 확인할 수 있다.
 
 <details>
@@ -30,6 +31,8 @@
 </div>
 </details>
 
+---
+
 ### Calculation
 - 3명의 Player (x1, x2, x3)가 존재한다고 할 때, Shapely value를 다음과 같이 계산된다. 
 - Player가 존재하지 않는 경우 contribution은 0이고 (Dummy 특성)
@@ -43,7 +46,10 @@
 	- Determistic : 계산할 때마다 같은 결과 출력
 	- 정형데이터의 경우 관측치별 해석과 전반적인 변수 중요도가 산출 가능하다.
 	- Text, Image 에 대한 해석도 가능
-	- 이론을 토대로 "Symmetry","Addtivie", "Dummy" 가 만족되는 현재 유일한 방법
+	- 이론을 토대로 "Symmetry","Additive", "Dummy" 가 만족되는 현재 유일한 방법
+		- Symmetry : Player A, B 가 모든상황에서 기여한 정도가 동일하면, 두 선수의 기여도도 동일
+		- Additive : Local 기여도를 합하면 전체 기여도가 된다. (Local과 Global이 연결되는 기본특징)
+		- Dummy : Player A가 dummy로 기여한 정도가 없으면 기여도는 0이 된다. 
 - Dis-Advantages
 	- SHAP은 계산해야 하는 Feature 조합의 수가 많아지는 경우 연산 시간이 길어지는 단점이 있다. 
 		- 이를 커버하기 위해 모델알고리즘에 따른 다른 계산법을 지원함 (Kernal, Tree, Deep, Gradient 등)
