@@ -108,8 +108,8 @@ Trade-Off : To maximize performance, we use high-capability model. But it is har
 | :---         |     :---:      |          :---: |     :---:      | :---: |
 | Feature Importance (FI)   | Specific     | Global    | [NoteBook](pdp/notebook_exam/01_titanic/XAI_Example.ipynb) |-NA|
 | [Permutation FI (PFI)](pfi/01.Permutation_FI.md)  | Agnostic     | Global    |[↑](pdp/notebook_exam/01_titanic/XAI_Example.ipynb) |-NA|
-| [Partial Dependent Plot (PDP)](pdp/02.PDP_ICE.md)   | Agnostic     | Global    |[↑](pdp/notebook_exam/01_titanic/XAI_Example.ipynb) |-NA|
-| [Individual Conditional Expectation (ICE)](pdp/02.PDP_ICE.md)      | Agnostic       | Local     |[↑](pdp/notebook_exam/01_titanic/XAI_Example.ipynb) |-NA|
+| [Partial Dependent Plot (PDP)](pdp/02.PDP_ICE_ALE.md)   | Agnostic     | Global    |[↑](pdp/notebook_exam/01_titanic/XAI_Example.ipynb) |-NA|
+| [Individual Conditional Expectation (ICE)](pdp/02.PDP_ICE_ALE.md)      | Agnostic       | Local     |[↑](pdp/notebook_exam/01_titanic/XAI_Example.ipynb) |-NA|
 | [Local Interpretable Model Explanations (LIME)](lime/lime.md)     | Agnostic-Surrogate       | Local      | [NoteBook](lime/titanic/titanic_lime.ipynb) | [NoteBook](lime/mnist/LIME_with_MNIST.ipynb)|
 | [SHapley Additive exPlanations (SHAP)](shap/shap.md)     | Agnostic       | Local/Global      | [NoteBook](shap/PyTorch_SHAP.ipynb) | [NoteBook](https://github.com/sooeun67/xai/blob/main/shap/PyTorch_SHAP.ipynb) |
 | Layer-wise Relevance Propagation (LRP)     | DL Agnostic     | Local      |-NA| [NoteBook](lrp/LRP_mnist.ipynb)|
