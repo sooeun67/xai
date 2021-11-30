@@ -31,7 +31,11 @@
 </details>
 
 ### Calculation
+- 3명의 Player (x1, x2, x3)가 존재한다고 할 때, Shapely value를 다음과 같이 계산된다. 
+- Player가 존재하지 않는 경우 contribution은 0이고 (Dummy 특성)
+- 각 Player 들의 Contribution을 모두 합하면 Total Contribution값과 일치한다. (Additive 특성)
 
+![SHAP 시각화1](SHAP_Calc.png)
 ---
 ### Advantages and Dis-Advantages
 - Advantages
@@ -116,7 +120,7 @@
 >	- 마우스 이동을 통해 각 instance의 값을 확인할 수 있다.
 
 ---
-#### 시각화 2) MNIST
+#### 시각화 2) IMAGE - MNIST
 
 ![SHAP 시각화6](https://github.com/sooeun67/xai/blob/main/shap/SHAP_deep_explainer.png)
 >- SHAP image plot : Plots SHAP values for image inputs.
@@ -124,21 +128,23 @@
 >	- 우측에는 각 클래스별 예측 결과를 SHAP Value를 통해 표현한다.
 
 ---
+#### 시각화 3) TEXT
+![SHAP 시각화7](https://github.com/sooeun67/xai/blob/main/shap/SHAP_exam_TEXT.png)
 
-Ref.
+### Ref.
 
-https://velog.io/@sjinu/개념정리SHAPShapley-Additive-exPlanations
+[WEB] https://velog.io/@sjinu/개념정리SHAPShapley-Additive-exPlanations
 
-https://datanetworkanalysis.github.io/2019/12/23/shap1
+[WEB] https://datanetworkanalysis.github.io/2019/12/23/shap1
 
-https://datanetworkanalysis.github.io/2019/12/24/shap2
+[WEB] https://datanetworkanalysis.github.io/2019/12/24/shap2
 
-https://moondol-ai.tistory.com/378?category=947304
+[WEB] https://moondol-ai.tistory.com/378?category=947304
 
-https://tootouch.github.io/IML/shap/
+[WEB] https://tootouch.github.io/IML/shap/
 
-https://christophm.github.io/interpretable-ml-book/shap.html
+[WEB] https://christophm.github.io/interpretable-ml-book/shap.html
 
-https://www.youtube.com/watch?v=BQSkV95Dy4s
+[youtube] https://www.youtube.com/watch?v=BQSkV95Dy4s
 
-https://www.youtube.com/watch?v=uh7j_cj9Yf8
+[youtube] https://www.youtube.com/watch?v=uh7j_cj9Yf8
