@@ -1,13 +1,15 @@
 ---
-## [SHAP] SHAP (SHapley Additive exPlanations)
+## [SHAP](https://github.com/slundberg/shap) SHAP (SHapley Additive exPlanations)
 
 ### Keyword
- - "변수 X1이 모델의 결과값(예측) P에 얼마나 기여를 할까?"
+ - "(관심 데이터 xi에 대해) 변수 X1이 모델의 결과값(예측) P에 얼마나 기여를 할까?"
 
 ### 개요
 - Shapley Value를 기반으로 하는 XAI
 	- Lundberg와 Lee가 제안한 SHAP (SHapley Additive exPlanations)은 Shapley Vlues를 기반으로 예측 값에 대한 각 feature의 기여도를 계산하여 Black box 모델 해석 제공 [(논문링크1)](https://arxiv.org/pdf/1705.07874.pdf) [(논문링크2)](https://arxiv.org/pdf/1802.03888.pdf)
-	- Shapley Value : 하나의 특성에 대한 중요도를 알기위해 특성들의 모든 조합을 구성하고 해당 특성의 유무에 따른 평균적인 변화를 통해 얻어낸 값
+	- Shapley Value : 하나의 특성에 대한 중요도를 알기위해 특성값들의 모든 조합을 구성하고 해당 특성의 유무에 따른 평균적인 Y 변화 값
+	- 전체 성과를 창출하는 데 각 참여자가 얼마나 공헌했는지의 기여도는 그 사람을 제외했을 때의 전체 성과 변화 정도로 나타낼 수 있다
+
 
 ### 설명
 - SHAP의 목적은 예측에 대한 각 특성의 기여도를 계산하여 관측치 x의 예측값을 설명하는 것이다. 
@@ -16,10 +18,11 @@
 - 이미지를 설명하기 위해 픽셀을 수퍼 픽셀(픽셀들의 그룹)로 그룹화하고 수퍼 픽셀 간의 예측값의 분포를 확인할 수 있다.
 
 <details>
-<summary>추가 설명 PPT</summary>
+<summary>계산방법의 직관적 이해 - 추가 설명 PPT</summary>
 <div markdown="1">
 	<img src="https://github.com/sooeun67/xai/blob/main/images/SHAP_PPT01.jpg"/>
 	<img src="https://github.com/sooeun67/xai/blob/main/images/SHAP_PPT02.jpg"/>
+	<img src="https://github.com/sooeun67/xai/blob/main/images/SHAP_PPT02_2.png"/>
 	<img src="https://github.com/sooeun67/xai/blob/main/images/SHAP_PPT03.jpg"/>
 	(출처 : https://www.youtube.com/watch?v=BQSkV95Dy4s)
 	<img src="https://github.com/sooeun67/xai/blob/main/images/SHAP_PPT04.jpg"/>
@@ -27,17 +30,21 @@
 </div>
 </details>
 
+### Calculation
+
 ---
-### 특징
-- LIME과 달리 "모든" 학습 데이터에 대한 예측값을 기준으로 시작한다.
-- 전체 데이터 중 관심 관측치의 위치를 파악하고 해석하는 것이 가능하다.
-- 정형데이터의 경우 관측치별 해석과 전반적인 변수 중요도가 산출 가능하다.
-- SHAP은 계산해야 하는 Feature 조합의 수가 많아지는 경우 연산 시간이 길어지는 단점이 있다.
-- SHAP는 Shapley value (데이터 한 개에 대한 설명, Local)을 기반으로, 데이터 셋의 ‘전체적인 영역’에 대한 해석이 가능하다(Global)
-- SHAP는 피처 간 의존성까지 고려해서 모델 영향력을 계산한다 (SHAP가 계산한 모든 피처 영향력의 합은 1)
-- 학습된 모델에 대해서만 설명할 수 있으므로, Feature의 추가와 삭제가 빠른 모델을 설명하기에는 적합하지 않다.
-- negative(-) 기여도가 계산 가능하다.
-- Shapley value는 모델 학습 이후 산출하는 것이므로, 원인 결과의 관계로 해석하면 안된다. (모델의 결과에 대한 설명 O, 인과관계 X)
+### Advantages and Dis-Advantages
+- Advantages
+	- LIME과 달리 SHAP는 Shapley value (데이터 한 개에 대한 설명, Local)을 기반으로, 데이터 셋의 **‘전체적인 영역’**에 대한 해석이 가능하다(Global)
+	- Determistic : 계산할 때마다 같은 결과 출력
+	- 정형데이터의 경우 관측치별 해석과 전반적인 변수 중요도가 산출 가능하다.
+	- Text, Image 에 대한 해석도 가능
+	- 이론을 토대로 "Symmetry","Addtivie", "Dummy" 가 만족되는 현재 유일한 방법
+- Dis-Advantages
+	- SHAP은 계산해야 하는 Feature 조합의 수가 많아지는 경우 연산 시간이 길어지는 단점이 있다. 
+		- 이를 커버하기 위해 모델알고리즘에 따른 다른 계산법을 지원함 (Kernal, Tree, Deep, Gradient 등)
+	- Shapley value는 모델 학습 이후 산출하는 것이므로, 원인 결과 관계로 해석의하면 안된다. (모델의 결과에 대한 설명 O, 인과관계 X)
+
 
 ### 종류
 - 모델의 특징에 따라 계산법을 달리하여 빠르게 처리한다.
