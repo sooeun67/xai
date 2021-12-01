@@ -53,6 +53,9 @@ LRP(Layer-wise Relevance Propagation)의 이름에서 볼 수 있듯이 이 meth
 ![taylor](./img/taylor.jpg)
 - Talyer Series 의 f(a) = 0 이 되는 a를 찾는 방법들과 Activation Relu가 아닌 상황에서 Talyer 2차이상 항들에 대한 보정방법등 다양한 방법들 존재
 
+![](./img/taylor-propagation.png)
+
+
 ---
 
 ## 3. Conclusion
