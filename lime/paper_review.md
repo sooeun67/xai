@@ -28,19 +28,17 @@ LIME Paper Review
 
 설명에서 필요한 특성 (Desired Characters)을 다음과 같이 정리
 
-**1) interpretable;**  입력과 그 결과를 “사용자가 이해할 수 있는” 설명을 제공해야 한다.
+**1) interpretable;**  입력(input variable)과 그 결과(response)를 “사용자가 이해할 수 있는” 설명을 제공해야 한다
 
-**2) local fidelity;**  유사한 데이터에 대해서는 유사한 설명이 이뤄져야 한다. replicate model's behavior locally
+**2) local fidelity;**  유사한 데이터에 대해서는 유사한 설명이 이뤄져야 한다 -- must replicate model's behavior locally
 
-**3) model-agnostic;**  어떤 형태의 모델에도 적용할 수 있어야 한다. 
+**3) model-agnostic;**  어떤 형태의 모델에도 적용할 수 있어야 한다 -- LIME : 입력 attribute의 중요도를 찾는다
 
-**4) global perspective;**  모델에 대한 전반적인 설명이 필요하다.
+**4) global perspective;**  모델에 대한 전반적인 설명이 필요하다 -- SP-LIME: 중요한 attribute set을 선택
 
-(1),(2)를 설명에서 필수적인 특성으로 꼽았고, 이를 기반으로 방법론을 구성하였습니다. 
-LIME은 두 가지 방식으로 설명하는데, 첫 번째는 입력 attribute의 중요도(importance)를 찾는 방식. 두 번째는 중요한 attribute set을 선택하는 방식. 각각 LIME, SP-LIME(Submodular Pick)으로 표현
 
-> In short LIME’s explainer is interpretable even by non-experts 라는 말을 할 정도로, 바로 알아듣기 "쉬운", "직관적인" 해석이 필요할 때 활용하면 좋을 것 같다.
-> single prediction에 대해 visualize 하기 때문에 속도 면에서는 discuss 되지 않은듯
+> - In short LIME’s explainer is interpretable even by non-experts 라는 말을 할 정도로, 바로 알아듣기 "쉬운", "직관적인" 해석이 필요할 때 활용하면 좋을 것 같다.
+> - single prediction에 대해 visualize 하기 때문에 속도 면에서는 discuss 되지 않은듯 (?)
 
 
 
