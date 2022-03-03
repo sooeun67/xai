@@ -1,10 +1,10 @@
-## [LIME](https://github.com/marcotcr/lime) (Local Interpretable Model-agnostic Explanation)
+# [LIME](https://github.com/marcotcr/lime) (Local Interpretable Model-agnostic Explanation)
 시작하기 앞서, Global Surrogate Analysis에 대해 언급해보자.
 - 우리는 복잡한 전역모델을 해석하기 힘들 때 때로는 단순한 전역모델을 사용하기도 함
 - 단순한 전역모델 (Linear/Logistic Regression, Decision Tree 등)을 통해 모델의 Feature Importance나 X인자별 민감도를 파악하여 X-Y 관계성에 대한 이해를 높이고 훈련된 복잡한 모델을 debugging 하는 용도로 사용하기도 하였음.
 - 그러나 이를 Local로 좁혀 data instance 하나에 대해 적용하는 것이 거의 불가능함 (적용은 가능하나 해석이 적용될 수 없음)
 
-#### 대리분석 (Surrogate Analysis)
+## 대리분석 (Surrogate Analysis)
 >본래 기능을 흉내내는 간단한 대체재를 만들어 prototype이 동작하는지 판단하는 분석기법
 	>![모델 f를 흉내내는 g1과 g2](https://github.com/sooeun67/xai/blob/main/images/surrogate_analysis.png)
 
@@ -17,19 +17,51 @@
 >	- 적은 학습 데이터도 사용가능
 >	- 모델이 바뀌더라도 feature 만 같다면 대리 분석 수행 가능
 
-##### 로컬 대리분석 (Local Surrogate)
+## 로컬 대리분석 (Local Surrogate)
 데이터 하나에 대해 원래 모델인 블랙박스 모델이 분류한 결과를 해부하고 해석하는 과정을 분석하는 기법으로 대표적으로 **LIME** 과 **SHAP-kernalExplainer** 이 있다
 
 ---
 
-### Concepts
+## Concepts
 - 국소적인 영역 (Local Data) 으로 scale을 좁혀보면, 우리는 이것들이 간단한 선형으로 설명할 수 있을 것이라는 생각을 해왔을 것.
+
 - 즉, local 에 대해 설명 가능한 간단한 모델(Surrogate Model) 을 적용하여 local 에 대한 설명성을 확보할 수 있지 않을까?
+	
+	
+	
 	> <img src="images/lime_intro01.png" alt="drawing" style="width:600px;"/>
 
 ---
 
-### Calculation
+<br/>
+
+#### 
+
+## LIME
+
+**코어 아이디어**는 간단하게 말하면, **LIME 블랙박스인 머신러닝 모델에 데이터에 여러 변화를 줄 때 예측값에 어떤 변화를 줄지 테스트** 해보는 것이다
+
+<br/>
+
+#### **ALGORITHM 간단히 이해해보기**
+
+- 해석하고 싶은 싱글 데이터 포인트와 classifier 선택하기
+- 선택한 데이터 포인트와 가까운 주변 데이터들을 샘플로 잡아 데이터셋을 새로 생성하고, 훈련된 모델을 사용해서 새로 생성된 인공 데이터 포인트의 클래스를 예측한다
+- 설명에 필요한 피처 갯수를 정하기 (피처 갯수가 적을수록 모델 해석이 간단해지는 경향이 있다)
+- 인공 데이터의 가중치 계산하기 (코사인거리와 커널 함수로 계산 / original 데이터 포인트와 가까울수록 무게와 중요성이 커진다)
+- 가중 인공 데이터 포인트로 선형 회귀 모델 피팅하기
+- 새롭게 훈련된 해석가능한 모델로 해석 하기
+
+
+
+
+
+-----
+
+
+
+## Calculation
+
 설명해야할 local 데이터 근처의 다른 data들을 original 모델(f(X))를 사용하여 준비하고, 이를 여러가지 단순한 모델알고리즘(G)에 적합하여 최소의 오차를 갖는 모델을 결정함.
 이 때 최소의 오차는 사용한 단순한 모델 알고리즘(g)와 orignal 모델 (f)의 오차를 최소화하고, g의 complexity 를 최소화하는것으로 결정됨
 
@@ -44,10 +76,17 @@ LIME Algorithm (Overall)
 
 	> <img src="images/lime_into2.png" alt="drawing" style="width:600px;"/>
 
-
 ---
 
-#### for Image Data-SET
+
+
+
+
+
+
+<br/>
+
+## for Image Data-SET
 
 - LIME 은 input data 에 대해 부분적으로 변화(permutation)를 준다
 - 40명의 얼굴을 학습한 후, 어떤 인풋 이미지가 들어왔을 때 40명 중 한 명을 구분하는 모델이 있다고 가정하자. 
@@ -62,7 +101,7 @@ LIME Algorithm (Overall)
 		> <img src="https://github.com/sooeun67/xai/blob/main/images/lime_4.png" alt="drawing" style="width:600px;"/>
 ---
 
-### Advantage and Dis-advantages
+## Advantage and Dis-advantages
 - Advantage
 	- model-agnostic: 어떠한 모델이든 이를 블랙박스로 취급하여 학습 가능
 	- Deep Learning 이나 GPU 사용하지 않고 적용 가능한, 가벼운 XAI 기법
@@ -77,17 +116,18 @@ LIME Algorithm (Overall)
 
 ---
 
-### 샘플 
+## 샘플 
 - Data: 뉴스 기사와 해당 기사의 20가지의 카테고리
 - 아래는 LIME 출력 결과물
---  88-89와 SE 모델이 자동차(auto) 카테고리를 결정하는 서브모듈러(highlighted)
+	--  88-89와 SE 모델이 자동차(auto) 카테고리를 결정하는 서브모듈러(highlighted)
 	> <img src="https://github.com/sooeun67/xai/blob/main/images/lime_result.png" alt="drawing" style="width:600px;"/>
 
 -------
-#### Reference (참고문헌)
+## Reference (참고문헌)
 - [Paper] LIME : https://arxiv.org/pdf/1602.04938.pdf
 - [서적] XAI 설명가능한 인공지능 도서
 - [Web] https://velog.io/@tobigs_xai/1%EC%A3%BC%EC%B0%A8-LIME-%EB%85%BC%EB%AC%B8-%EB%A6%AC%EB%B7%B0-Why-Should-I-Trust-You-Explaining-the-Predictions-of-Any-Classifier
 - [Web] https://yjjo.tistory.com/3#:~:text=SP%2DLIME%3A%20%EB%AA%A8%ED%98%95%20%EC%A0%84%EC%B2%B4%EC%9D%98,%EB%A5%BC%20%EC%84%A0%ED%83%9D%ED%95%B4%EC%A3%BC%EB%8A%94%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9E%85%EB%8B%88%EB%8B%A4.
 - [Web] LIME: explain Machine Learning predictions | by Giorgio Visani | Towards Data Science
+- https://christophm.github.io/interpretable-ml-book/lime.html
 
