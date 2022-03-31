@@ -121,10 +121,24 @@ LIME Algorithm (Overall)
 - 아래는 LIME 출력 결과물
 	--  88-89와 SE 모델이 자동차(auto) 카테고리를 결정하는 서브모듈러(highlighted)
 	> <img src="https://github.com/sooeun67/xai/blob/main/images/lime_result.png" alt="drawing" style="width:600px;"/>
+## 나의 후기/의견
+- 빠르게 예제 하나로 쉬운 시각화 가능
+	- 보여주고 싶은 대표 케이스를 설명하기에 좋다
+	- 어떤 이벤트가 일어난 특정 시점, 특정 데이터 포인트를 안다면 활용하기 좋을 것 같다
+- Jupyternotebook 호환성 good
 
+- 한 지점밖에 못 보기 때문에, 구간을 볼 때 취약
+- Lime model 의 feature 계수들의 활용성..?
+	- util 함수 지원 X
+	- dataframe 으로 계수 제공 X -- single instance 에 초점을 맞춰 전반적으로 계수 트렌드를 보게 배려하지 않고 있다
+	- Tabular data의 경우 feature 계수가 probability 로 나오기 때문에 feature 계수를 추출하려면
+		- list 로 single instance 에 대한 feature 값들을 받아서 전처리 필요
+		- 처리된 feature 들을 dataframe 화 시켜야 하는데, 만약 feature 갯수가 많다면, 전처리 과정에서 놓치거나 오류가 나올 수 있는 가능성이 많아 굉장히 꼼꼼히 보거나 features 에 대해 빠삭히 아는 상태에서 처리해야할 것 같다
+		 
 -------
 ## Reference (참고문헌)
 - [Paper] LIME : https://arxiv.org/pdf/1602.04938.pdf
+- https://christophm.github.io/interpretable-ml-book/lime.html <- 강추!
 - [서적] XAI 설명가능한 인공지능 도서
 - [Web] https://velog.io/@tobigs_xai/1%EC%A3%BC%EC%B0%A8-LIME-%EB%85%BC%EB%AC%B8-%EB%A6%AC%EB%B7%B0-Why-Should-I-Trust-You-Explaining-the-Predictions-of-Any-Classifier
 - [Web] https://yjjo.tistory.com/3#:~:text=SP%2DLIME%3A%20%EB%AA%A8%ED%98%95%20%EC%A0%84%EC%B2%B4%EC%9D%98,%EB%A5%BC%20%EC%84%A0%ED%83%9D%ED%95%B4%EC%A3%BC%EB%8A%94%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9E%85%EB%8B%88%EB%8B%A4.
